@@ -8,7 +8,7 @@
 | Designation  | __Release 3.0.0__  |
 | Current status | __pre-released (2023-12-15)__      |
 | Release date   | __2024-01-15 (planned)__    |
-| Specifications| [specification link here](https://fachportal.gematik.de/schnelleinstieg/downloadcenter)|
+| Specifications| [Vorabveröffentlichung ePA](https://fachportal.gematik.de/schnelleinstieg/downloadcenter/vorabveroeffentlichungen#c8090)|
 | Previous release| __Release 2.6.0__|
 | Previous branch | [**ePA-2.6**](https://github.com/gematik/api-ePA/tree/ePA-2.6)|
 | Follow-up | not yet defined |
