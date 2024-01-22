@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- gematik revision="\main\rel_ors2\1" -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:annotation>
 		<xs:documentation> $Id: mConcept.cls,v 1.9 2007/11/26 19:28:05 wbeeler Exp $ 

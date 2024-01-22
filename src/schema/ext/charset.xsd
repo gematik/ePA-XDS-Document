@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- gematik revision="\main\rel_online\1" -->
-<!-- edited with XMLSpy v2007 rel. 3 sp1 (http://www.altova.com) by Senator für Finanzen (Senator für Finanzen) -->
-<!-- Mit XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) von Frank Steimke (Freie Hansestadt Bremen) bearbeitet -->
 <xs:schema xmlns:lc="http://xoev.de/latinchars/1_1/charset" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xoev.de/latinchars/1_1/charset" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="de">
 	<xs:attributeGroup name="SimpleCharacterAttributes">
 		<xs:annotation>

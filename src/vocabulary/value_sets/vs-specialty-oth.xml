@@ -37,7 +37,7 @@
                         value="Daten des elektronischen Medikationsplans nach § 334 Absatz 1 Satz 2 Nummer 4"
                     />
                 </extension>
-                <code value="emergency"/>
+                <code value="emp"/>
                 <display value="Elektronischer Medikationsplan"/>
             </concept>
             <concept>
@@ -46,7 +46,7 @@
                         value="Daten der elektronischen Notfalldaten nach § 334 Absatz 1 Satz 2 Nummer 5 und 7"
                     />
                 </extension>
-                <code value="nfd"/>
+                <code value="emergency"/>
                 <display value="Notfalldaten"/>
             </concept>
             <concept>
@@ -114,7 +114,7 @@
                 </extension>
                 <code value="ega"/>
                 <display value="Elektronische Gesundheitsakte (eGA)"/>
-            </concept>
+            </concept>            
             <concept>
                 <extension url="http://hl7.org/fhir/StructureDefinition/valueset-concept-comments">
                     <valueString
@@ -127,11 +127,8 @@
             <concept>
                 <extension url="http://hl7.org/fhir/StructureDefinition/valueset-concept-comments">
                     <valueString
-                        value="Daten des Versicherten aus digitalen Gesundheitsanwendungen des Versicherten nach § 33a,"
+                        value="Daten des Versicherten aus digitalen Gesundheitsanwendungen des Versicherten nach § 33a SGB V"
                     />
-                </extension>
-                <extension url="http://hl7.org/fhir/StructureDefinition/valueset-deprecated">
-                    <valueBoolean value="true"/>
                 </extension>
                 <code value="diga"/>
                 <display value="DiGA"/>

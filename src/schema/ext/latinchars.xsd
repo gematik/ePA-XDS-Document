@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- gematik revision="\main\rel_online\rel_opb1\1" -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes" targetNamespace="http://xoev.de/latinchars/1_1/datatypes" version="1.1.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:annotation>
     <xs:documentation>Diese Schema-Datei ist Bestandteil des von der KoSIT in XÖV herausgebenen Standards "Lateinische Zeichen in Unicode".</xs:documentation>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- gematik revision="\main\rel_ors2\1" -->
 <xs:schema 
 xmlns="urn:ihe:iti:rmd:2017" 
 xmlns:xmime="http://www.w3.org/2005/05/xmlmime" 
