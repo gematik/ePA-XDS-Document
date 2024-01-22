@@ -1,5 +1,4 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<!-- gematik revision="\main\rel_ors2\1" -->
 <!-- $Header: /cvsroot/ebxmlrr/ebxmlrr-spec/misc/3.0/schema/rs.xsd,v 1.9 2005/01/31 22:33:54 farrukh_najmi Exp $ -->
 <schema targetNamespace="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" 
   xmlns="http://www.w3.org/2001/XMLSchema" 

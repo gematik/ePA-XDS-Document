@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ASCII"?>
-<!-- gematik revision="\main\rel_ors2\1" -->
 <!-- $Id: NarrativeBlock.xsd,v 1.6 2007/03/20 02:42:07 wbeeler Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:hl7-org:v3" targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
    <xs:complexType name="StrucDoc.Text" mixed="true">
