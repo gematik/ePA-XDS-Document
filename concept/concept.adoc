@@ -1,4 +1,4 @@
-= XDS Document Service der "ePA für alle"
+= Grobkonzept der "ePA für alle": XDS Document Service
 :title-page:
 :title-logo-image: image:Gematik_Logo_Flag.svg[pdfwidth=4.25in,align=center]
 :source-highlighter: rouge
@@ -37,8 +37,8 @@ endif::[]
 :sectnums:
 
 // --- PDF theme options ---
-// :revdate: 22.01.2024
-:revnumber: 3.0 RC
+// :revdate: 30.01.2024
+:revnumber: 3.0
 :document-title: XDS Document Service der "ePA für alle"
 :document-subtitle: gemKPT_ePAfuerAlleXdsDoc
 :organization: gematik GmbH
@@ -52,7 +52,7 @@ endif::[]
 
 ifdef::backend-pdf[]
 [.metadata]
-//Version: {revnumber}, 22.01.2024
+//Version: {revnumber}, 30.01.2024
 endif::[]
 
 
@@ -80,6 +80,12 @@ endif::[]
 |22.01.2024
 |
 |Ersterstellung
+|gematik
+
+|3.0
+|30.01.2024
+|
+|Veröffentlichung
 |gematik
 
 |===
@@ -204,19 +210,83 @@ Generell können Uniform-/Mixed-Dokumente nur gesamthaft über die jeweilige Kat
 
 Beim Zugriff auf referenzierte Dokumente reagiert der XDS Document Service bei verborgenen Dokumenten dahingehend, dass er nur Zugriff auf nicht-verborgene Dokumente zulässt. Ist beispielsweise der Befundbericht durch den Versicherten verborgen worden, wird ausschließlich der Entlassungsbrief zurückgegeben.
 
-Es werden die folgenden Möglichkeiten für das Verbergen und Sichtbarmachen von Dokumenten unterstützt und in einer logischen *General Deny Policy* bzw. *User-specific Deny Policy* festgehalten:
+Es werden die folgenden Möglichkeiten für das Verbergen und Sichtbarmachen von Dokumenten unterstützt und in einer logischen *General Deny Policy* festgehalten:
 
 === Kategorienbasiertes Verbergen von Dokumenten ggü. allen Leistungserbringerinstitutionen
 Der Versicherte/Vertreter wählt im ePA-FdV die zu verbergenden Datenkategorien aus. Das ePA-FdV übermittelt diese Kategorien über eine spezifische Schnittstelle an den XDS Document Service, welcher sie in die General Deny Policy aufnimmt.
 
-=== Kategorienbasiertes Verbergen von Dokumenten ggü. einer Leistungserbringerinstitution
-Der Versicherte/Vertreter wählt im ePA-FdV für eine gewählte Leistungserbringerinstitution die zu verbergenden Datenkategorien aus. Das ePA-FdV übermittelt diese Kategorien über eine spezifische Schnittstelle an den XDS Document Service, welcher sie in die User-specific Deny Policy für die gewählte Leistungserbringerinstitution aufnimmt.
 
 === Dokumentenspezifisches Verbergen von Dokumenten ggü. allen Leistungserbringerinstitutionen
 Der Versicherte/Vertreter wählt im ePA-FdV die zu verbergenden Dokumente aus. Das ePA-FdV übermittelt diese Dokumenten-IDs über eine spezifische Schnittstelle an den XDS Document Service, welcher sie in die General Deny Policy aufnimmt.
 
-=== Dokumentenspezifisches Verbergen von Dokumenten ggü. einer Leistungserbringerinstitution
-Der Versicherte/Vertreter wählt im ePA-FdV für eine gewählte Leistungserbringerinstitution die zu verbergenden Dokumente aus. Das ePA-FdV übermittelt diese Dokumenten-IDs über eine spezifische Schnittstelle an den XDS Document Service, welcher sie in die User-specific Deny Policy für die gewählte Leistungserbringerinstitution aufnimmt.
 
 === Dokumentenspezifisches Verbergen von Dokumenten ggü. allen Leistungserbringerinstitutionen beim Einstellen durch eine Leistungserbringerinstitution
 Auf Wunsch des Versicherten stellt der Leistungserbringer ein Dokument verborgen ein. Dazu setzt er über sein Primärsystem das Metadatum "Confidentiality Code" auf den Wert "CON (Constraint)" und lädt das Dokument in den XDS Document Service hoch. Der XDS Document Service erkennt anhand des Codes, dass er dieses Dokument in die General Deny Policy aufnehmen muss. Eine eventuelle Aktualisierung eines bekannten, verborgenen Dokuments führt ebenso zu einer Aufnahme des neuen Dokuments in die General Deny Policy.
+
+
+[#_glossar]
+== Abkürzungsverzeichnis und Glossar
+
+//*A*
+
+//*B*
+
+//*C*
+
+*D*
+
+* DiGA – Digitale Gesundheitsanwendung
+
+//*E*
+
+//*F*
+
+//*G*
+
+//*H*
+
+*I*
+
+* IHE – Integrating the Healthcare Enterprise
+
+//*J*
+
+//*K*
+
+*L*
+
+* LE – Leistungserbringer
+
+* LEI – Leistungserbringerinstitution
+
+*M*
+
+* MIO – Medizinisches Informationsobjekt
+
+//*N*
+
+//*O*
+
+//*P*
+
+//*Q*
+
+//*R*
+
+//*S*
+
+//*T*
+
+//*U*
+
+//*V*
+
+//*W*
+
+*X*
+
+* XDS – Cross-Enterprise Document Sharing
+
+//*Y*
+
+//*Z*
