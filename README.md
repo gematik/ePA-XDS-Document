@@ -1,6 +1,6 @@
 <img align="right" width="200" height="37" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
-  
-# Electronic Personal Health Record System (ePA XDS Document)
+ 
+# Electronic Health Record System (ePA XDS Document)
 
 <details>
   <summary>Table of Contents</summary>
@@ -14,27 +14,27 @@
 </details>
 
 ## About ePA XDS Document
-This repository offers technical information for the Electronic Personal Health Record Environment (ePA) as part of the Telematic Infrastructure (TI).
+This repository provides technical information for the Electronic Health Record (ePA) application as part of the Telematic Infrastructure (TI).
 
-This branch relates to a particular release in context of **ePA Version 3** ('ePA für Alle') 
+This branch relates to a particular release in context of **ePA version 3** ('ePA für alle') 
 The provided content comprises normative and supplementary resources for the **XDS Document Service**.
 
-For resources related to ePA Data Management and Services see further associated repositories:
+For resources related to ePA data management and basic services see further associated repositories:
 
 [**ePA-Medication**](https://github.com/gematik/epa-medication/tree/ePA-3.0)</br>
 [**ePA-Basic**](https://github.com/gematik/epa-basic/tree/ePA-3.0)
 
 
-The current branch accompanies a particular release of specification documents of ePA version 3 (a set of normative specification documents for components, producttypes and vendortypes) published on [Fachportal Gematik](https://fachportal.gematik.de/) (see [Branchinformation.md](./Branchinformation.md)  for specific version information and links).
-The content in /src is normative in context of requirements defined by those specification documents and is essential for product approvals. Any other content is for information. Normative content here, the associated repositories and the documents together form a single product release of the Electronic Personal Health Record system for an approval process.
-The affected and covered producttypes are **epa-Aktensystem** and **epa-Frontend des Versicherten**. 
+The current branch accompanies a particular release of specification documents of ePA version 3 (a set of normative specification documents for components, product types and vendor types) published on [Fachportal Gematik](https://fachportal.gematik.de/) (see [Branchinformation.md](./Branchinformation.md) for specific version information and links).
+The content in /src is normative in context of requirements defined by those specification documents and is essential for product approvals. Any other content is for information. Normative content here, the associated repositories and the documents together form a single product release of the Electronic Health Record system for an approval process.
+The affected and covered product types are **ePA-Aktensystem** and **ePA-Frontend des Versicherten**. 
 
 ## Release Notes
 See [ReleaseNotes.md](./ReleaseNotes.md) for all information regarding the releases.
 
 ## License
- 
-Copyright 2023 gematik GmbH
+
+Copyright 2024 gematik GmbH
  
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  
@@ -44,7 +44,7 @@ Unless required by applicable law the software is provided "as is" without warra
  
 The software is the result of research and development activities, therefore not necessarily quality assured and without the character of a liable product. For this reason, gematik does not provide any support or other user assistance (unless otherwise stated in individual cases and without justification of a legal obligation). Furthermore, there is no claim to further development and adaptation of the results to a more current state of the art.
  
-Gematik may remove published results temporarily or permanently from the place of publication at any time without prior notice or justification.
+gematik may remove published results temporarily or permanently from the place of publication at any time without prior notice or justification.
 
 
 ## Contributions
