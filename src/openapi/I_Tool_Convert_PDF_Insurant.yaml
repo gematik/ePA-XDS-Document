@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: I_Tool_Convert_PDF_Insurant
+  description: |
+    **Prerequisites**:</br>
+    The Health Record System shall provide 
+    - name
+    - role ((profession-)oid)
+    - identifier (KVNR)
+    of the current user (requestor) for evaluation in operations.
+
+    Operations mandate the use of a VAU channel and a valid ID-Token (i.e. a user session). 
+    As this service does not address particular health records, no entitlement for the user
+    is required. Also no (confirmed) device registration for the device used is required.
+
+    **Retry interval**:</br>
+    The following retry intervals are suggested in case of an error response:<br>
+    - '500' Internal Error
+      - approx. 10 minutes
+
+    **User Agent**:</br>
+    The user agent information (x-useragent) is part of any request, even if 
+    not essentially required for the operation (e.g. raw-data collection), and
+    may be considered for provider internal use. 
+
+  contact:
+    name: gematik GmbH
+    url: 'https://www.gematik.de'
+
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+
+  version: 1.0.0
+
+  # version history:
+  # ----------------
+  # version 1.0.0
+  #   - initial version
+
+servers:
+- url: https://epa-hst1.prod.epa4all.de
+
+tags:
+- name: PDF/A
+  description: |
+   Conversion utility for clients of the insurant (ePA-FdV9).
+
+   PDF files in a health record shall be stored in PDF/A format. This API allows
+   a user to convert a PDF file to a health record accepted format and to review
+   the conversion result prior to submission to the health record. 
+
+paths:
+  /epa/tools/convert/v1/pdf:
+    parameters:
+      - $ref: '#/components/parameters/useragent'
+    post:
+      tags:
+      - PDF/A
+      operationId: convertPDF
+      summary: "(convertPDF) Converts a PDF file to a PDF/A file."
+      externalDocs:
+        description: 'Specification: gemSpec_Aktensystem_ePAfueralle, chapter "Formatprüfung beim Einstellen von Dokumenten", A_25233*'
+        url: https://gemspec.gematik.de/docs/gemSpec/
+      description: |
+        Convert a given file in PDF format to a PDF/A format.        
+        This operation is limited to entitled users of role oid_versicherter.
+
+        **Client**:</br>
+        A client shall display the converted result for review to a user.
+
+        **Provider**:</br>
+        The submitted PDF file shall be converted to a PDF/A formatted file according
+        to allowed PDF/A variants defined in A_25233* (see below)
+
+        This operation requires an authorized user session. A valid device registration
+        or a health record context including valid entitlement is not required.
+
+        | Conditions | Status code | Error code | Remarks |
+        |------------|-------------|------------|---------|
+        | Successful operation | 200 |||
+        | Request does not match schema | 400 | malformedRequest ||
+        | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Cannot convert | 422 | unprocessable | Origin PDF cannot be converted |
+        | Any other error | 500 | internalError | (see 'Retry interval') |
+
+         </br>
+        | Postconditions                        | Remarks |
+        |---------------------------------------|---------|
+        | none ||
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                description: A PDF file for PDF/A conversion
+                type: object
+                properties:
+                  input:
+                    description: A Base64 encoded PDF file
+                    type: string
+                    format: byte
+                required:
+                  - input
+                example: 
+                  input: 'aBase64EncodedPDFforPDFtoPDF/AConversion'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                description: A converted PDF/A file
+                type: object
+                properties:
+                  output: 
+                    description: A Base64 encoded PDF/A file  
+                    type: string
+                    format: byte
+              example: 
+                output: 'aBase64EncodedPDFtoPDF/AConversionResult'
+        '400':
+          $ref: '#/components/responses/Error400BadRequest'
+        '403':
+          $ref: '#/components/responses/Error403Forbidden'
+        '422':
+          $ref: '#/components/responses/Error422Unprocessable'
+        '500':
+          $ref: '#/components/responses/Error500InternalError'
+
+components:
+  responses:
+    Error400BadRequest:
+      description: Bad Request.
+      content:
+        application/json:
+          example:
+            errorCode: malformedRequest
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error403Forbidden:
+      description: Forbidden.
+      content:
+        application/json:
+          example:
+            errorCode: invalidOid
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error422Unprocessable:
+      description: Unprocessable.
+      content:
+        application/json:
+          example:
+            errorCode: statusUnprocessable
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error500InternalError:
+      description: Internal Server Error
+      content:
+        application/json:
+          example:
+            errorCode: internalError
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+
+  parameters:
+    useragent:
+      name: x-useragent
+      in: header
+      description: user agent information
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserAgentType'
+
+  schemas:
+    UserAgentType:
+      description: "Information about client software with: ClientId(20 characters) + / + VersionNumber (1 to 15 characters)."
+      type: string
+      pattern: '^[a-zA-Z0-9]{20}\/[a-zA-Z0-9\-\.]{1,15}$'
+      example: CLIENTID1234567890AB/2.1.12-45
+    ErrorType:
+      description: Error object with additional information about the occurred error
+      type: object
+      properties:
+        errorCode:
+          description: Error condition specifier
+          type: string
+        errorDetail:
+          description: Additional details regarding the error condition (if applicable)
+          type: string
+      required:
+        - errorCode

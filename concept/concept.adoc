@@ -38,7 +38,7 @@ endif::[]
 
 // --- PDF theme options ---
 // :revdate: 30.01.2024
-:revnumber: 3.0
+:revnumber: 3.0.1 RC
 :document-title: XDS Document Service der "ePA für alle"
 :document-subtitle: gemKPT_ePAfuerAlleXdsDoc
 :organization: gematik GmbH
@@ -88,6 +88,18 @@ endif::[]
 |Veröffentlichung
 |gematik
 
+|3.0.1 RC
+|18.03.2024
+|1.4
+|Konvertierung von PDF-Dokumenten hinzugefügt, User-specific Deny Policy entfernt; Vorveröffentlichung zur Kommentierung
+|gematik
+
+// |3.1.0 Pre-Release
+// |28.03.2023
+// |
+// |Vorveröffentlichung
+// |gematik
+
 |===
 
 toc::[]
@@ -111,7 +123,7 @@ Für den XDS Document Service werden bestimmte IHE ITI-Transaktionen vorgegeben.
 Die übergreifende Dokumentenverwaltung unter Nutzung des XDS Document Service basiert auf der Implementierungsstrategie, wie sie vereinfacht in der nachstehenden <<#fig:ihe-xds-implementierungsstrategie, Abbildung>> skizziert ist.
 
 [#fig:ihe-xds-implementierungsstrategie]
-image::IHE-XDS-Implementierungsstrategie.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="IHE XDS-Implementierungsstrategie mit zentraler Registry und Repository",width=80%, pdfwidth=80%,float="center",align="center",title-align="center"]
+image::drawio/IHE-XDS-Implementierungsstrategie.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="IHE XDS-Implementierungsstrategie mit zentraler Registry und Repository",width=80%, pdfwidth=80%,float="center",align="center",title-align="center"]
 
 Das Primärsystem aus einer Leistungserbringerinstitution implementiert die IHE XDS-Akteure "Document Consumer" sowie "Document Source", welche Dokumente aus einer/einem Document Registry/Document Repository des Aktenanbieters abrufen sowie neue Dokumente darin registrieren/einstellen. Das ePA-Frontend des Versicherten implementiert ebenso diese Akteure. Kostenträger und Omnbudsstellen stellen ebenfalls neue Dokumente ein, sodass auch hier ein IHE XDS-Akteur "Document Source" implementiert wird.
 
@@ -133,10 +145,10 @@ _Hinweis: Kursiv dargestellte IHE ITI-Akteure und Transaktionen sind als produkt
 [#fig:ihe-xds-transaktionsübersicht]
 ifdef::backend-pdf[]
 .A
-image::IHE-XDS-Transaktionsübersicht.png[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Überblick über IHE ITI-Akteure und assoziierte Transaktionen",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+image::drawio/IHE-XDS-Transaktionsübersicht.png[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Überblick über IHE ITI-Akteure und assoziierte Transaktionen",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
 endif::[]
 ifeval::["{backend}" == "html5"]
-image::IHE-XDS-Transaktionsübersicht.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Überblick über IHE ITI-Akteure und assoziierte Transaktionen",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+image::drawio/IHE-XDS-Transaktionsübersicht.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Überblick über IHE ITI-Akteure und assoziierte Transaktionen",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
 endif::[]
 
 Die IHE ITI-basierte Nachrichtenübermittlung in der nachstehenden <<#fig:ihe-xds-prozessablauf, Abbildung>> verdeutlicht die anzuwendenden Transaktionen, um ein Dokument durch einen Leistungserbringer in die ePA eines Versicherten zu speichern. Der Ablauf zum Speichern eines Dokuments durch den Versicherten bzw. der Abruf eines Dokuments erfolgt analog in umgekehrter Ablauflogik und ist – wie auch der Zugang eines Kostenträgers – nicht in der nachstehenden Abbildung dargestellt.
@@ -197,7 +209,8 @@ Eine Änderung dieser Metadaten führt zu einer erneuten Prüfung der bestehende
 
 Für jede DiGA wird je eine Befugnis verwaltet, welcher durch den Versicherten über das ePA-FdV eingerichtet werden kann. Die von einer spezifischen DiGA eingestellten Daten werden in einem für diese DiGA spezifischen XDS Folder verwaltet. Das Anlegen dieses XDS Folder erfolgt durch den XDS Document Service – unter der Voraussetzung, dass es eine gültige Befugnis für diese DiGA gibt – beim Zugriff einer DiGA auf den XDS Document Service. Bei der Erstellung des XDS Folder setzt der XDS Document Service den Wert für Folder.title entsprechend des Attributs "organizationName" aus dem IDToken der zugreifenden DiGA. Weiterhin belegt er den Wert für Folder.comment mit "urn:gematik:diga:<Telematik-ID>", wobei die Telematik-ID dem Attribut "idNummer" des ID-Token entspricht. Die Zuordnung von DiGA-Dokumenten beim Schreiben zum spezifischen XDS Folder erfolgt implizit über die Telematik-ID des ID-Token aus der User Session. Da ein DiGA-spezifischer XDS Folder im Titel stets den Namen der DiGA enthält, kann ein Leistungserbringer über sein Primärsystem die relevante DiGA auswählen und auf deren eingestellte DiGA-Dokumente zugreifen, sofern eine Befugnis  vorliegt. Eine Aktualisierung eines bestehenden DiGA-Dokuments mit der bekannten DocumentEntry.entryUUID kann durch einen DiGA-Client erfolgen. Hierzu ist es erforderlich, dass ein DiGA-Client die DocumentEntry.entryUUID persistiert und keine symbolischen IDs gemäß verwendet.
 
-
+=== Komfortfunktion zur Konvertierung von PDF-Dokumenten
+Das ePA-Aktensystem bietet Versicherten eine Funktion an, über die sie mittels ePA-FdV PDF-Dokumente in PDF/A-Dokumente konvertieren lassen können. Die Versicherten können das Ergebnis im ePA-FdV betrachten und wenn gewünscht das PDF/A-Dokument ins ePA-Aktensystem einstellen. 
 
 [#_verbergen]
 == Constraint Management - Verbergen und sichtbar machen von Dokumenten

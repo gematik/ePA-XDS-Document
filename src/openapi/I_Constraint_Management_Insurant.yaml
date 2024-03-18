@@ -49,10 +49,16 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.0.0
+  version: 1.1.0
 
   # version history:
   # ----------------
+  # version 1.1.0
+  #   - removed user-specific deny policy
+  #   - corrections for categoryId in enum and description
+  #   - corrections in examples
+  # version 1.0.0
+  #   - first release version
   # version 0.0.1
   #   - initial version for review
 
@@ -62,25 +68,18 @@ servers:
 tags:
   - name: ConstraintManagement
     description: |
-      Constraint Management allow to configure the deny policies of a health record by 
-      setting or deleting constraints (assignments of a deny policy).</br>
+      Constraint Management allow to configure the general deny policiy of a health record by 
+      setting or deleting constraints (assignments of the deny policy).</br>
       An assignment may be related to a single document, a folder or a category. Any document affected
-      by an assigment will be either hidden to users of the deny policy affected user roles or
-      to a dedicated user only.</br>
-      
-      Deny Policies are available in two flavours:
-      - a **General Deny Policy**. Each document hidden by assignments of this policy is not visible
-      for any user of any deny policy affected user role.
-      - a **User-specific Deny Policy**. Each document hidden by assignments of this policy is not visible
-      for the addressed user (telematik-id) of the deny policy affected user role.
+      by an assigment will be hidden to any user of the deny policy affected user roles.</br>
       
       The assignments of the deny policies hide documents for the XDS Document Service only. Assignments 
       related to folders or categories hide all contained documents (not the folder / category)
 
       **Allowed user groups/ roles**:</br> 
-      The deny policies affect the following user groups (roles). User-specific Deny Policy
-      assignments are only applicable for users of those roles. The following list of oids is for information 
-      only and may be incomplete, the normative requirement is defined in A_24306-*
+      The general deny policy affects the following user groups (roles) for each assignment.
+      The following list of oids is for information only and may be incomplete, the normative 
+      requirement is defined in A_24306-*
       - oid_praxis_arzt
       - oid_krankenhaus
       - oid_institution-vorsorge-reha
@@ -104,15 +103,14 @@ tags:
       for any folder with type = "uniform" or "mixed" (see 
       src/implementation_guides on GitHub/gematik/api-epa).
       
-      - dentalrecord
-      - childsrecord
-      - mothersrecord
+      - dental
+      - child
+      - pregnancy_childbirth
       - vaccination
 
       **Exceptions**
-      The category "emp" can not be hidden by assignments of the general deny policy or the
-      user-specific deny policy. The participation in the electronic medical process is managed
-      by consent decisions only. 
+      The category "emp" can not be hidden by assignments of the general deny policy. 
+      The participation in the electronic medical process is managed by consent decisions only. 
       This applies also for single documents of this category.
       
       **Remarks**:</br>
@@ -131,28 +129,24 @@ paths:
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/policyType'
         - $ref: '#/components/parameters/for'
         - $ref: '#/components/parameters/categories'
         - $ref: '#/components/parameters/documents'
         - $ref: '#/components/parameters/folders'
-        - $ref: '#/components/parameters/telematikid'
-        - $ref: '#/components/parameters/oid'
       tags:
         - ConstraintManagement
       operationId: getDenyPolicyAssignments
       summary: (getDenyPolicyAssignments) get a list of actual set deny policy assignments
       description: |
-        Get a combined list of actual set assignments of the general deny policy and the user-
-        specific deny policy.</br>  
+        Get a combined list of actual set assignments of the general deny policy.</br>  
         This operation is limited to entitled users of role oid_versicherter.
         
         **Client**:</br>
         A client shall consider the schema for 'Queries' and 'Paging' (see below).
 
         **Provider**:</br>
-        The returned list shall contain only assignments matching the query parameters of both 
-        deny policies (general and user-specific).</br>
+        The returned list shall contain only assignments matching the query parameters of the 
+        general deny policy.</br>
 
         Paging:</br>
         _offset_ and _limit_ parameters shall be related to the amount of assignments matching the query and only occur 
@@ -169,8 +163,6 @@ paths:
         of 65e2a7a3-b46f-40f4-b821-4efc23a57400).</br>
         Queries for _documents_ shall use identifiers matching the referenceId schema 
         'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' ('uniqueId' equals also the documentEntry.uniqueId (a uuid)). 
-
-        Queries for _tid_ and _oid_ shall consider the user-specific deny policy assignments only.
 
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
@@ -215,14 +207,8 @@ paths:
               examples:
                 getAll:
                   $ref: '#/components/examples/Get_AllPolicyAssignments'
-                FilterPolicyType:
-                  $ref: '#/components/examples/Get_QueryForPolicyType'
                 FilterCategory:
                   $ref: '#/components/examples/Get_QueryForCategory'
-                FilterTID:
-                  $ref: '#/components/examples/Get_QueryForTID'
-                FilterOid:
-                  $ref: '#/components/examples/Get_QueryForRole'
         '400':
           $ref: '#/components/responses/Error400BadRequest'
         '403':
@@ -240,7 +226,7 @@ paths:
       operationId: setDenyPolicyAssignment
       summary: (setDenyPolicyAssignment) set a new deny policy assignment
       description: |
-        Set a new assignment for a deny policy (general or user-specific).</br>
+        Set a new assignment for the general deny policy.</br>
         This operation is limited to entitled users of role oid_versicherter.
 
         **Client**:</br>
@@ -258,7 +244,7 @@ paths:
         used in documentEntry.referenceIdList with 'uniqueId' the symbolic uuid of documentEntry.uniqueID.
 
         The category "emp" shall not be hidden, neither shall single documents of this category be hidden.
-        Assignment requests for this category or document sof this category shall be rejected.
+        Assignment requests for this category or documents of this category shall be rejected.
 
         Each new valid assigment shall be extended by a uuid (assignmentId) for identification
         by the server. This uuid shall be unique in context of deny policies for the health record.
@@ -274,7 +260,6 @@ paths:
         | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
         | Addressed _document_ or _folder_ does not exist | 404 | noResource ||
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
-        | The assignment parameter _oid_ is not in the list of allowed oids | 409 | requestMismatch ||
         | An addressed _folder_ is not of type _dynamic_ | 409 | requestMismatch ||
         | An addressed _document_ is part of a restricted category or folder | 409 | requestMismatch ||
         | An addressed _category_ is not part of the XDS Document Service | 409 | requestMismatch ||
@@ -302,12 +287,6 @@ paths:
                 $ref: '#/components/examples/Add_document_to_general_deny_policy'
               GDPolicyAssignmentForFolders:
                 $ref: '#/components/examples/Add_folder_to_general_deny_policy'
-              USDPolicyAssignmentForCategories:
-                $ref: '#/components/examples/Add_category_to_user-specific_deny_policy'
-              USDPolicyAssignmentForDocuments:
-                $ref: '#/components/examples/Add_document_to_user-specific_deny_policy'
-              USDPolicyAssignmentForFolders:
-                $ref: '#/components/examples/Add_folder_to_user-specific_deny_policy'
       responses:
         '201':
           description: Created
@@ -323,12 +302,6 @@ paths:
                   $ref: '#/components/examples/Response_document_to_general_deny_policy'
                 GDPolicyAssignmentForFolders:
                   $ref: '#/components/examples/Response_folder_to_general_deny_policy'
-                USDPolicyAssignmentForCategories:
-                  $ref: '#/components/examples/Response_category_to_user-specific_deny_policy'
-                USDPolicyAssignmentForDocuments:
-                  $ref: '#/components/examples/Response_document_to_user-specific_deny_policy'
-                USDPolicyAssignmentForFolders:
-                  $ref: '#/components/examples/Response_folder_to_user-specific_deny_policy'
         '400':
           $ref: '#/components/responses/Error400BadRequest'
         '403':
@@ -351,7 +324,7 @@ paths:
       operationId: deleteDenyPolicyAssignment
       summary: (deleteDenyPolicyAssignment) delete a specific deny policy assignment
       description: |
-        Delete one existing assignment of a deny policy (general or user-specific).</br>
+        Delete one existing assignment of the general deny policy.</br>
         This operation is limited to entitled users of role oid_versicherter.
 
         **Client**:</br>
@@ -372,7 +345,7 @@ paths:
          </br>
         | Postconditions                        | Remarks |
         |---------------------------------------|---------|
-        | The addressed assignment is removed from the associated policy ||
+        | The addressed assignment is removed from the general deny policy ||
         | A log-entry for the operation exists | all operation results |
 
       responses:
@@ -472,12 +445,6 @@ components:
       description: Specifies skipped matching pages ('pagesize' == limit), (default = 0).
       schema:
         type: integer
-    policyType:
-      name: policyType
-      in: query
-      description: Query the deny policy assignments for general deny policy assignment (gdp) or user-specific deny policy assignments (usdp).
-      schema:
-        $ref: '#/components/schemas/PolicyType'
     for:
       name: for
       in: query
@@ -502,36 +469,12 @@ components:
       description: Query for deny policy assignment hiding a specific folder.
       schema:
         $ref: '#/components/schemas/UuidType'
-    telematikid:
-      name: parameters.tid
-      in: query
-      description: Query for deny policy assignments related to a specific telematik-id (considers user-specific deny policy only)
-      schema:
-        $ref: '#/components/schemas/TelematikIdType'
-    oid:
-      name: parameters.oid
-      in: query
-      description: 'Query for deny policy assignments related to a specific role (professionOID, considers user-specific deny policy only)'
-      schema:
-        $ref: '#/components/schemas/OidType'
   schemas:
     AssignmentIdType:
       description: Server-assigned unique uuid of a particular deny policy assignment
       type: string
       format: uuid
       example: fa2bc929-f6c9-419f-ae75-cea040927651
-    TelematikIdType:
-      description: A Telematik-ID
-      type: string
-      pattern: '[0-9]{1}[-]{1}\d{1,126}$'
-      example: 2-883110000118994
-    PolicyType:
-      description: Select a Deny Policy
-      type: string
-      enum:
-        - gdp
-        - usdp
-      example: gdp
     ForType:
       description: Select an assignment type
       type: string
@@ -540,11 +483,6 @@ components:
         - document
         - folder
       example: category
-    OidType:
-      description: A professionOID
-      type: string
-      pattern: '([0-2])((\.0)|(\.[1-9][0-9]*))*$'
-      example: '1.2.276.0.76.4.50'
     UuidType:
       description: An urn-encoded UUID
       type: string
@@ -559,11 +497,10 @@ components:
       type: string
       enum:
         - reports
-        - emp
-        - nfd
+        - emergency
         - eab
-        - dentalrecord
-        - childsrecord
+        - dental
+        - child
         - pregnancy_childbirth
         - vaccination
         - patient
@@ -572,16 +509,15 @@ components:
         - eau
         - rehab
         - other
+      example: emergency
     DenyPolicyAssignmentType:
       description: Basic type for a deny policy assignments.
       oneOf:
         - $ref: '#/components/schemas/GDPolicyAssignmentForDocumentType'
         - $ref: '#/components/schemas/GDPolicyAssignmentForFolderType'
         - $ref: '#/components/schemas/GDPolicyAssignmentForCategoryType'
-        - $ref: '#/components/schemas/USDPolicyAssignmentForDocumentType'
-        - $ref: '#/components/schemas/USDPolicyAssignmentForFolderType'
-        - $ref: '#/components/schemas/USDPolicyAssignmentForCategoryType'
     DenyPolicyAssignmentResponseType:
+      description: Basic type for a deny policy response.
       allOf:
         - type: object
           properties:
@@ -592,17 +528,10 @@ components:
             - $ref: '#/components/schemas/GDPolicyAssignmentForDocumentType'
             - $ref: '#/components/schemas/GDPolicyAssignmentForFolderType'
             - $ref: '#/components/schemas/GDPolicyAssignmentForCategoryType'
-            - $ref: '#/components/schemas/USDPolicyAssignmentForDocumentType'
-            - $ref: '#/components/schemas/USDPolicyAssignmentForFolderType'
-            - $ref: '#/components/schemas/USDPolicyAssignmentForCategoryType'
     GDPolicyAssignmentForCategoryType:
       description: Global deny policy assigment for a single category.
       type: object
       properties:
-        policyType:
-          type: string
-          enum:
-            - gdp
         for:
           type: string
           enum:
@@ -622,10 +551,6 @@ components:
       description: Global deny policy assigment for a single document.
       type: object
       properties:
-        policyType:
-          type: string
-          enum:
-            - gdp
         for:
           type: string
           enum:
@@ -645,10 +570,6 @@ components:
       description: Global deny policy assigment for a single folder.
       type: object
       properties:
-        policyType:
-          type: string
-          enum:
-            - gdp
         for:
           type: string
           enum:
@@ -658,117 +579,6 @@ components:
           required:
             - folderUUID
           properties:
-            folderUUID:
-              allOf:
-                - $ref: '#/components/schemas/UuidType'
-              description: Folder.entryUUID
-          additionalProperties: false
-      additionalProperties: false
-    USDPolicyAssignmentForDocumentType:
-      description: User-specific deny policy assigment for a single document.
-      type: object
-      properties:
-        policyType:
-          type: string
-          enum:
-            - usdp
-        for:
-          type: string
-          enum:
-            - document
-        parameters:
-          type: object
-          required:
-            - tid
-            - oid
-            - displayName
-            - rootDocumentId
-          properties:
-            tid:
-              allOf:
-                - $ref: '#/components/schemas/TelematikIdType'
-              description: Telematik-Id of related user
-            oid:
-              allOf:
-                - $ref: '#/components/schemas/OidType'
-              description: profession-oid of related user
-            displayName:
-              description: Name of related user
-              type: string
-            rootDocumentId:
-              allOf:
-                - $ref: '#/components/schemas/RootDocumentIdType'
-              description: rootDocumentUniqueId from DocumentEntry.referenceIdList
-          additionalProperties: false
-      additionalProperties: false
-    USDPolicyAssignmentForCategoryType:
-      description: User-specific deny policy assigment for a single category.
-      type: object
-      properties:
-        policyType:
-          type: string
-          enum:
-            - usdp
-        for:
-          type: string
-          enum:
-            - category
-        parameters:
-          type: object
-          required:
-            - tid
-            - oid
-            - displayName
-            - categoryId
-          properties:
-            tid:
-              allOf:
-                - $ref: '#/components/schemas/TelematikIdType'
-              description: Telematik-Id of related user
-            oid:
-              allOf:
-                - $ref: '#/components/schemas/OidType'
-              description: profession-oid of related user
-            displayName:
-              description: Name of related user
-              type: string
-            categoryId:
-              allOf:
-                - $ref: '#/components/schemas/CategoryIdType'
-              description: technical identifier of category
-          additionalProperties: false
-      additionalProperties: false
-    USDPolicyAssignmentForFolderType:
-      description: User-specific deny policy assigment for a single folder.
-      type: object
-      properties:
-        policyType:
-          type: string
-          enum:
-            - usdp
-        for:
-          type: string
-          enum:
-            - folder
-        parameters:
-          type: object
-          required:
-            - tid
-            - oid
-            - displayName
-            - folderUUID
-          properties:
-            tid:
-              allOf:
-                - $ref: '#/components/schemas/TelematikIdType'
-              description: Telematik-Id of related user
-            oid:
-              allOf:
-                - $ref: '#/components/schemas/OidType'
-              description: profession-oid of related user
-            displayName:
-              description: Name of related user
-              type: string
             folderUUID:
               allOf:
                 - $ref: '#/components/schemas/UuidType'
@@ -804,22 +614,19 @@ components:
     Add_category_to_general_deny_policy:
       summary: Set an assigment for a category in General Deny Policy
       value:
-        policyType: gdp
         for: category
         parameters:
-          categoryId: patientdoc
+          categoryId: patient
     Response_category_to_general_deny_policy:
       summary: Response of assigment for a category in General Deny Policy
       value:
         assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
-        policyType: gdp
         for: category
         parameters:
-          categoryId: patientdoc
+          categoryId: patient
     Add_document_to_general_deny_policy:
       summary: Set an assigment for a document in General Deny Policy
       value:
-        policyType: gdp
         for: document
         parameters:
           rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
@@ -827,88 +634,22 @@ components:
       summary: Response of assigment for a document in General Deny Policy
       value:
         assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
-        policyType: gdp
         for: document
         parameters:
           rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
     Add_folder_to_general_deny_policy:
       summary: Set an assigment for a folder in General Deny Policy
       value:
-        policyType: gdp
         for: folder
         parameters:
-          folderUUID: 84d92a96-3585-4ad3-94b1-c4f3dbe87176
+          folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
     Response_folder_to_general_deny_policy:
       summary: Response of assigment for a folder in General Deny Policy
       value:
         assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
-        policyType: gdp
         for: folder
         parameters:
-          folderUUID: 84d92a96-3585-4ad3-94b1-c4f3dbe87176
-    Add_category_to_user-specific_deny_policy:
-      summary: Set an assigment for a category in User-specific Deny Policy
-      value:
-        policyType: uspd
-        for: category
-        parameters:
-          tid: 2-883110000092414
-          oid: 1.2.276.0.76.4.51
-          displayName: Zahnarztpraxis Norbert Freiherr Schomaker
-          categoryId: dentalrecord
-    Response_category_to_user-specific_deny_policy:
-      summary: Response of assigment for a category in User-specific Deny Policy
-      value:
-        assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-        policyType: uspd
-        for: category
-        parameters:
-          tid: 2-883110000092414
-          oid: 1.2.276.0.76.4.51
-          displayName: Zahnarztpraxis Norbert Freiherr Schomaker
-          categoryId: dentalrecord
-    Add_document_to_user-specific_deny_policy:
-      summary: Set an assigment for a document in User-specific Deny Policy
-      value:
-        policyType: usdp
-        for: document
-        parameters:
-          tid: 1-883110000092404
-          oid: 1.2.276.0.76.4.50
-          displayName: Praxis Dr. Annamaria Heckhausén
-          rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
-    Response_document_to_user-specific_deny_policy:
-      summary: Response of assigment for a document in User-specific Deny Policy
-      value:
-        assignmentId: 74343201-e669-4675-8414-3ce517220a3b
-        policyType: usdp
-        for: document
-        parameters:
-          tid: 1-883110000092404
-          oid: 1.2.276.0.76.4.50
-          displayName: Praxis Dr. Annamaria Heckhausén
-          rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
-    Add_folder_to_user-specific_deny_policy:
-      summary: Set an assigment for a folder in User-specific Deny Policy
-      value:
-        policyType: usdp
-        for: folder
-        parameters:
-          tid: 1-883110000092404
-          oid: 1.2.276.0.76.4.50
-          displayName: Praxis Dr. Annamaria Heckhausén
-          folderUUID: f9929ed6-1119-4dea-a48a-1cfe8117f7b7
-    Response_folder_to_user-specific_deny_policy:
-      summary: Response of assigment for a folder in User-specific Deny Policy
-      value:
-        assignmentId: 7730578d-9380-47d6-ae82-d2c47ca399af
-        policyType: usdp
-        for: folder
-        parameters:
-          tid: 1-883110000092404
-          oid: 1.2.276.0.76.4.50
-          displayName: Praxis Dr. Annamaria Heckhausén
-          folderUUID: f9929ed6-1119-4dea-a48a-1cfe8117f7b7
+          folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
     Get_AllPolicyAssignments:
       summary: Get all Deny Policy assignments.
       value:
@@ -918,69 +659,31 @@ components:
           totalMatching: 6
         data:
           - assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
-            policyType: gdp
             for: category
             parameters:
-              categoryId: patientdoc
+              categoryId: patient
           - assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
-            policyType: gdp
             for: document
             parameters:
               rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
           - assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
-            policyType: gdp
             for: folder
             parameters:
               folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
           - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-            policyType: uspd
             for: category
             parameters:
-              tid: 2-883110000092414
-              oid: 1.2.276.0.76.4.51
-              displayName: Zahnarztpraxis Norbert Freiherr Schomaker
-              categoryId: dentalrecord
+              categoryId: dental
           - assignmentId: 74343201-e669-4675-8414-3ce517220a3b
-            policyType: usdp
             for: document
             parameters:
-              tid: 1-883110000092404
-              oid: 1.2.276.0.76.4.50
-              displayName: Praxis Dr. Annamaria Heckhausén
               rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
           - assignmentId: 7730578d-9380-47d6-ae82-d2c47ca399af
-            policyType: usdp
             for: folder
             parameters:
-              tid: 1-883110000092404
-              oid: 1.2.276.0.76.4.50
-              displayName: Praxis Dr. Annamaria Heckhausén
               folderUUID: urn:uuid:f9929ed6-1119-4dea-a48a-1cfe8117f7b7
-    Get_QueryForPolicyType:
-      summary: Get all Deny Policy assignments for the policyType gdp.
-      value:
-        query:
-          offset: 0
-          limit: 50
-          totalMatching: 3
-        data:
-          - assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
-            policyType: gdp
-            for: category
-            parameters:
-              categoryId: patientdoc
-          - assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
-            policyType: gdp
-            for: document
-            parameters:
-              rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
-          - assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
-            policyType: gdp
-            for: folder
-            parameters:
-              folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
     Get_QueryForCategory:
-      summary: Get all Deny Policy assignments for category dentalrecord.
+      summary: Get all Deny Policy assignments for category dental.
       value:
         query:
           offset: 0
@@ -988,51 +691,6 @@ components:
           totalMatching: 1
         data:
           - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-            policyType: uspd
             for: category
             parameters:
-              tid: 2-883110000092414
-              oid: 1.2.276.0.76.4.51
-              displayName: Zahnarztpraxis Norbert Freiherr Schomaker
-              categoryId: dentalrecord
-    Get_QueryForTID:
-      summary: Get all Deny Policy assignments for telematik-id 1-883110000092404.
-      value:
-        query:
-          offset: 0
-          limit: 50
-          totalMatching: 2
-        data:
-          - assignmentId: 74343201-e669-4675-8414-3ce517220a3b
-            policyType: usdp
-            for: document
-            parameters:
-              tid: 1-883110000092404
-              oid: 1.2.276.0.76.4.50
-              displayName: Praxis Dr. Annamaria Heckhausén
-              rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
-          - assignmentId: 7730578d-9380-47d6-ae82-d2c47ca399af
-            policyType: usdp
-            for: folder
-            parameters:
-              tid: 1-883110000092404
-              oid: 1.2.276.0.76.4.50
-              displayName: Praxis Dr. Annamaria Heckhausén
-              folderUUID: urn:uuid:f9929ed6-1119-4dea-a48a-1cfe8117f7b7
-    Get_QueryForRole:
-      summary: Get all Deny Policy assignments for oid oid_zahnarztpraxis.
-      value:
-        query:
-          offset: 0
-          limit: 50
-          totalMatching: 1
-        data:
-          - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-            policyType: uspd
-            for: category
-            parameters:
-              tid: 2-883110000092414
-              oid: 1.2.276.0.76.4.51
-              displayName: Zahnarztpraxis Norbert Freiherr Schomaker
-              categoryId: dentalrecord
-
+              categoryId: dental
