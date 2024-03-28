@@ -26,7 +26,7 @@
             <value value="http://www.gematik.de"/>
         </telecom>
     </contact>
-    <description value="Vertraulichkeitskennzeichnung des Dokuments für ePA 1.0 und ePA 2.0"/>
+    <description value="Vertraulichkeitskennzeichnung des Dokuments für ePA"/>
     <compose>
         <include>
             <!-- Die folgenden Codes müssen während der Migrationsphase von ePA 1.0 zu ePA 2.0 durch ein ePA-Aktensystem unterstützt werden, da ePA 1.0 Primärsysteme oder ePA-Frontends des Versicherten diese Codes weiterhin verwenden. -->

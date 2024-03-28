@@ -26,7 +26,7 @@
             <value value="http://www.gematik.de"/>
         </telecom>
     </contact>
-    <description value="Grobe Klassifizierung des Dokuments für ePA 1.0 und ePA 2.0"/>
+    <description value="Grobe Klassifizierung des Dokuments für ePA"/>
     <compose>
         <include>
             <extension url="http://hl7.org/fhir/StructureDefinition/valueset-systemName">

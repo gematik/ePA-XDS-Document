@@ -31,10 +31,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.0.0
+  version: 1.0.1
 
   # version history:
   # ----------------
+  # version 1.0.1
+  #   - removed base64 format requirement for PDFs
   # version 1.0.0
   #   - initial version
 
@@ -92,34 +94,24 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/pdf:
               schema:
                 description: A PDF file for PDF/A conversion
-                type: object
-                properties:
-                  input:
-                    description: A Base64 encoded PDF file
-                    type: string
-                    format: byte
-                required:
-                  - input
+                type: string
+                format: binary
                 example: 
-                  input: 'aBase64EncodedPDFforPDFtoPDF/AConversion'
+                  input: 'a PDF file for conversion to a PDF7A format'
       responses:
         "200":
           description: Ok
           content:
-            application/json:
+            application/pdf:
               schema:
                 description: A converted PDF/A file
-                type: object
-                properties:
-                  output: 
-                    description: A Base64 encoded PDF/A file  
-                    type: string
-                    format: byte
+                type: string
+                format: binary
               example: 
-                output: 'aBase64EncodedPDFtoPDF/AConversionResult'
+                output: 'a converted file in PDF/A format'
         '400':
           $ref: '#/components/responses/Error400BadRequest'
         '403':
