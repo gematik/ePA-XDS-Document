@@ -1,0 +1,2202 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="kdl-vs-2024" />
+  <url value="http://dvmd.de/fhir/ValueSet/kdl" />
+  <identifier>
+    <system value="urn:ietf:rfc:3986" />
+    <value value="urn:oid:1.2.276.0.76.11.469" />
+  </identifier>
+  <version value="2024" />
+  <name value="ValueSetKDL" />
+  <title value="ValueSet Klinische Dokumentenklassen-Liste (Version 2024)" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2024-01-01" />
+  <publisher value="Der Fachverband für Dokumentation und Informationsmanagement in der Medizin (DVMD)" />
+  <contact>
+    <name value="Der Fachverband für Dokumentation und Informationsmanagement in der Medizin (DVMD)" />
+    <telecom>
+      <system value="email" />
+      <value value="dvmd@dvmd.de" />
+    </telecom>
+    <telecom>
+      <system value="url" />
+      <value value="https://www.dvmd.de" />
+    </telecom>
+  </contact>
+  <contact>
+    <name value="Leitung der Arbeitsgruppe: Annett Müller" />
+    <telecom>
+      <system value="email" />
+      <value value="mueller@dvmd.de" />
+    </telecom>
+    <telecom>
+      <system value="url" />
+      <value value="https://dvmd.de/publikationen/kdl/" />
+    </telecom>
+  </contact>
+  <description value="ValueSets sind Listen von Codes, die in einem bestimmten Kontext verwendet werden. Durch sog. &amp;quot;Terminology-Binding&amp;quot; können Attribute von FHIR-Ressourcen an ValueSets gebunden werden, um die Menge der zulässigen Werte für dieses Attribut einzuschränken.  Dieses ValueSet enthält sämtliche Codes aus dem CodeSystem &amp;quot;KDL&amp;quot; und ist für Bindings an Attribute geeignet, an denen alle Werte aus dem CodeSystem &amp;quot;KDL&amp;quot; erlaubt werden sollen.  Beispiel: DocumentReference.type" />
+  <copyright value="2024 DVMD e.V." />
+  <compose>
+    <include>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <filter>
+        <property value="child" />
+        <op value="exists" />
+        <value value="false" />
+      </filter>
+    </include>
+  </compose>
+  <expansion>
+    <timestamp value="2024-01-01" />
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010101" />
+      <display value="Ärztliche Stellungnahme" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010102" />
+      <display value="Durchgangsarztbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010103" />
+      <display value="Entlassungsbericht intern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010104" />
+      <display value="Entlassungsbericht extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010105" />
+      <display value="Reha-Bericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010106" />
+      <display value="Verlegungsbericht intern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010107" />
+      <display value="Verlegungsbericht extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010108" />
+      <display value="Vorläufiger Arztbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010109" />
+      <display value="Ärztlicher Befundbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010110" />
+      <display value="Ärztlicher Verlaufsbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010111" />
+      <display value="Ambulanzbrief" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010112" />
+      <display value="Kurzarztbrief" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010113" />
+      <display value="Nachschaubericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010114" />
+      <display value="Interventionsbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD010199" />
+      <display value="Sonstiger Arztbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020101" />
+      <display value="Arbeitsunfähigkeitsbescheinigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020102" />
+      <display value="Beurlaubung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020103" />
+      <display value="Todesbescheinigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020104" />
+      <display value="Ärztliche Bescheinigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020105" />
+      <display value="Notfall-/Vertretungsschein" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020106" />
+      <display value="Wiedereingliederungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020107" />
+      <display value="Aufenthaltsbescheinigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020108" />
+      <display value="Geburtsanzeige" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020199" />
+      <display value="Sonstige Bescheinigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020201" />
+      <display value="Anatomische Skizze" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020202" />
+      <display value="Befundbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020203" />
+      <display value="Bericht Gesundheitsuntersuchung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020204" />
+      <display value="Krebsfrüherkennung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020205" />
+      <display value="Messblatt" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020206" />
+      <display value="Belastungserprobung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020207" />
+      <display value="Ärztlicher Fragebogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020208" />
+      <display value="Befund extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD020299" />
+      <display value="Sonstige ärztliche Befunderhebung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060101" />
+      <display value="Konsilanforderung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060102" />
+      <display value="Konsilanmeldung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060103" />
+      <display value="Konsilbericht intern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060104" />
+      <display value="Konsilbericht extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060105" />
+      <display value="Visitenprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060106" />
+      <display value="Tumorkonferenzprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060107" />
+      <display value="Teambesprechungsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060108" />
+      <display value="Anordnung/Verordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060109" />
+      <display value="Verordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AD060199" />
+      <display value="Sonstige Fallbesprechung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010101" />
+      <display value="Übersicht abrechnungsrelevanter Diagnosen / Prozeduren" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010102" />
+      <display value="G-AEP Kriterien" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010103" />
+      <display value="Kostenübernahmeverlängerung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010104" />
+      <display value="Schriftverkehr MD Kasse" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010105" />
+      <display value="Abrechnungsschein" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010106" />
+      <display value="Rechnung ambulante/stationäre Behandlung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010107" />
+      <display value="MD Prüfauftrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010108" />
+      <display value="MD Gutachten" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010109" />
+      <display value="Begründete Unterlagen Leistungskodierung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010199" />
+      <display value="Sonstige Abrechnungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010201" />
+      <display value="Antrag auf Rehabilitation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010202" />
+      <display value="Antrag auf Betreuung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010203" />
+      <display value="Antrag auf gesetzliche Unterbringung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010204" />
+      <display value="Verlängerungsantrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010205" />
+      <display value="Antrag auf Psychotherapie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010206" />
+      <display value="Antrag auf Pflegeeinstufung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010207" />
+      <display value="Kostenübernahmeantrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010208" />
+      <display value="Antrag auf Leistungen der Pflegeversicherung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010209" />
+      <display value="Antrag auf Kurzzeitpflege" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010210" />
+      <display value="Antrag auf Fixierung/Isolierung beim Amtsgericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010299" />
+      <display value="Sonstiger Antrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010301" />
+      <display value="Anästhesieaufklärungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010302" />
+      <display value="Diagnostischer Aufklärungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010303" />
+      <display value="Operationsaufklärungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010304" />
+      <display value="Aufklärungsbogen Therapie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM010399" />
+      <display value="Sonstiger Aufklärungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM030101" />
+      <display value="Aktenlaufzettel" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM030102" />
+      <display value="Checkliste Entlassung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM030103" />
+      <display value="Entlassungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM030104" />
+      <display value="Patientenlaufzettel" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM030199" />
+      <display value="Sonstige Checkliste Administration" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050101" />
+      <display value="Datenschutzerklärung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050102" />
+      <display value="Einverständniserklärung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050103" />
+      <display value="Erklärung Nichtansprechbarkeit Patienten" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050104" />
+      <display value="Einverständniserklärung Abrechnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050105" />
+      <display value="Einverständniserklärung Behandlung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050106" />
+      <display value="Einwilligung und Datenschutzerklärung Entlassungsmanagement" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050107" />
+      <display value="Schweigepflichtentbindung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050108" />
+      <display value="Entlassung gegen ärztlichen Rat" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050109" />
+      <display value="Aufforderung zur Herausgabe der medizinischen Dokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050110" />
+      <display value="Aufforderung zur Löschung der medizinischen Dokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050111" />
+      <display value="Aufforderung zur Berichtigung der medizinischen Dokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM050199" />
+      <display value="Sonstige Einwilligung/Erklärung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160101" />
+      <display value="Blutgruppenausweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160102" />
+      <display value="Impfausweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160103" />
+      <display value="Vorsorgevollmacht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160104" />
+      <display value="Patientenverfügung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160105" />
+      <display value="Wertgegenständeverwaltung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160106" />
+      <display value="Allergiepass" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160107" />
+      <display value="Herzschrittmacherausweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160108" />
+      <display value="Nachlassprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160109" />
+      <display value="Mutterpass (Kopie)" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160110" />
+      <display value="Ausweiskopie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160111" />
+      <display value="Implantat-Ausweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160112" />
+      <display value="Betreuerausweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160113" />
+      <display value="Patientenbild" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160199" />
+      <display value="Sonstiges patienteneigenes Dokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160201" />
+      <display value="Belehrung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160202" />
+      <display value="Informationsblatt" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160203" />
+      <display value="Informationsblatt Entlassungsmanagement" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160299" />
+      <display value="Sonstiges Patienteninformationsblatt" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160301" />
+      <display value="Heil- / Hilfsmittelverordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160302" />
+      <display value="Krankentransportschein" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160303" />
+      <display value="Verordnung häusliche Krankenpflege" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM160399" />
+      <display value="Sonstige poststationäre Verordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM170101" />
+      <display value="Dokumentationsbogen Meldepflicht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM170102" />
+      <display value="Hygienestandard" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM170103" />
+      <display value="Patientenfragebogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM170104" />
+      <display value="Pflegestandard" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM170105" />
+      <display value="Qualitätssicherungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM170199" />
+      <display value="Sonstiges Qualitätssicherungsdokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190101" />
+      <display value="Anforderung Unterlagen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190102" />
+      <display value="Schriftverkehr Amtsgericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190103" />
+      <display value="Schriftverkehr MD Arzt" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190104" />
+      <display value="Schriftverkehr Krankenkasse" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190105" />
+      <display value="Schriftverkehr Deutsche Rentenversicherung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190106" />
+      <display value="Sendebericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190107" />
+      <display value="Empfangsbestätigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190108" />
+      <display value="Handschriftliche Notiz" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190109" />
+      <display value="Lieferschein" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190110" />
+      <display value="Schriftverkehr Amt/Gericht/Anwalt" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190111" />
+      <display value="Schriftverkehr Strafverfolgung und Schadensersatz" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190112" />
+      <display value="Anforderung Unterlagen MD" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190113" />
+      <display value="Widerspruchsbegründung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190114" />
+      <display value="Schriftverkehr Unfallversicherungsträger und Leistungserbringer" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190199" />
+      <display value="Sonstiger Schriftverkehr" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190201" />
+      <display value="Beratungsbogen Sozialer Dienst" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190202" />
+      <display value="Soziotherapeutischer Betreuungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190203" />
+      <display value="Einschätzung Sozialdienst" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190204" />
+      <display value="Abschlussbericht Sozialdienst" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM190299" />
+      <display value="Sonstiges Dokument Sozialdienst" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM220101" />
+      <display value="Behandlungsvertrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM220102" />
+      <display value="Wahlleistungsvertrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM220103" />
+      <display value="Heimvertrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM220104" />
+      <display value="Angaben zur Vergütung von Mitarbeitenden" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AM220199" />
+      <display value="Sonstiger Vertrag" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU010101" />
+      <display value="Anamnesebogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU010102" />
+      <display value="Anmeldung Aufnahme" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU010103" />
+      <display value="Aufnahmebogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU010104" />
+      <display value="Checkliste Aufnahme" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU010105" />
+      <display value="Stammblatt" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU010199" />
+      <display value="Sonstige Aufnahmedokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU050101" />
+      <display value="Verordnung von Krankenhausbehandlung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU050102" />
+      <display value="Überweisungsschein" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU050103" />
+      <display value="Überweisungsschein Entlassung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU050104" />
+      <display value="Verlegungsschein Intern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU050199" />
+      <display value="Sonstiges Einweisungs-/Überweisungsdokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU190101" />
+      <display value="Einsatzprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU190102" />
+      <display value="Notaufnahmebericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU190103" />
+      <display value="Notaufnahmebogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU190104" />
+      <display value="Notfalldatensatz" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU190105" />
+      <display value="ISAR Screening" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="AU190199" />
+      <display value="Sonstige Dokumentation Rettungsstelle" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020101" />
+      <display value="Anforderung bildgebende Diagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020102" />
+      <display value="Angiographiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020103" />
+      <display value="CT-Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020104" />
+      <display value="Echokardiographiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020105" />
+      <display value="Endoskopiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020106" />
+      <display value="Herzkatheterprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020107" />
+      <display value="MRT-Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020108" />
+      <display value="OCT-Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020109" />
+      <display value="PET-Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020110" />
+      <display value="Röntgenbefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020111" />
+      <display value="Sonographiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020112" />
+      <display value="SPECT-Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020113" />
+      <display value="Szintigraphiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020114" />
+      <display value="Mammographiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020115" />
+      <display value="Checkliste bildgebende Diagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG020199" />
+      <display value="Sonstige Dokumentation bildgebende Diagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060101" />
+      <display value="Anforderung Funktionsdiagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060102" />
+      <display value="Audiometriebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060103" />
+      <display value="Befund evozierter Potentiale" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060104" />
+      <display value="Blutdruckprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060105" />
+      <display value="CTG-Ausdruck" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060106" />
+      <display value="Dokumentationsbogen Feststellung Hirntod" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060107" />
+      <display value="Dokumentationsbogen Herzschrittmacherkontrolle" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060108" />
+      <display value="Dokumentationsbogen Lungenfunktionsprüfung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060109" />
+      <display value="EEG-Auswertung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060110" />
+      <display value="EMG-Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060111" />
+      <display value="EKG-Auswertung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060112" />
+      <display value="Manometriebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060113" />
+      <display value="Messungsprotokoll Augeninnendruck" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060114" />
+      <display value="Neurographiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060115" />
+      <display value="Rhinometriebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060116" />
+      <display value="Schlaflabordokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060117" />
+      <display value="Schluckuntersuchung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060118" />
+      <display value="Checkliste Funktionsdiagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060119" />
+      <display value="Ergometriebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060120" />
+      <display value="Kipptischuntersuchung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060121" />
+      <display value="Augenuntersuchung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060122" />
+      <display value="Dokumentationsbogen ICD Kontrolle" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060123" />
+      <display value="Zystometrie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060124" />
+      <display value="Uroflowmetrie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060199" />
+      <display value="Sonstige Dokumentation Funktionsdiagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060201" />
+      <display value="Schellong Test" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060202" />
+      <display value="H2 Atemtest" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060203" />
+      <display value="Allergietest" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060204" />
+      <display value="Zahlenverbindungstest" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060205" />
+      <display value="6-Minuten-Gehtest" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060209" />
+      <display value="Sonstige Funktionstests" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="DG060299" />
+      <display value="Sonstiger Funktionstest" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED010199" />
+      <display value="Sonstige Audiodokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED020101" />
+      <display value="Fotodokumentation Operation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED020102" />
+      <display value="Fotodokumentation Dermatologie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED020103" />
+      <display value="Fotodokumentation Diagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED020104" />
+      <display value="Videodokumentation Operation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED020199" />
+      <display value="Foto-/Videodokumentation Sonstige" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110101" />
+      <display value="Behandlungspfad" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110102" />
+      <display value="Notfalldatenmanagement (NFDM)" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110103" />
+      <display value="Medikationsplan elektronisch (eMP)" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110104" />
+      <display value="eArztbrief" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110105" />
+      <display value="eImpfpass" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110106" />
+      <display value="eZahnärztliches Bonusheft" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110107" />
+      <display value="eArbeitsunfähigkeitsbescheinigung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110108" />
+      <display value="eRezept" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110109" />
+      <display value="Pflegebericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110110" />
+      <display value="eDMP" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110111" />
+      <display value="eMutterpass" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110112" />
+      <display value="KH-Entlassbrief" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110113" />
+      <display value="U-Heft Untersuchungen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110114" />
+      <display value="U-Heft Teilnahmekarte" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110115" />
+      <display value="U-Heft Elternnotiz" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110116" />
+      <display value="Überleitungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED110199" />
+      <display value="Sonstige Dokumentation KIS" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190101" />
+      <display value="E-Mail Befundauskunft" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190102" />
+      <display value="E-Mail Juristische Beweissicherung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190103" />
+      <display value="E-Mail Arztauskunft" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190104" />
+      <display value="E-Mail Sonstige" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190105" />
+      <display value="Fax Befundauskunft" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190106" />
+      <display value="Fax Juristische Beweissicherung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190107" />
+      <display value="Fax Arztauskunft" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190108" />
+      <display value="Fax Sonstige" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="ED190199" />
+      <display value="Sonstiger elektronischer Schriftverkehr" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB020101" />
+      <display value="Blutgasanalyse" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB020102" />
+      <display value="Blutkulturenbefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB020103" />
+      <display value="Herstellungs- und Prüfprotokoll von Blut und Blutprodukten" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB020104" />
+      <display value="Serologischer Befund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB020199" />
+      <display value="Sonstige Dokumentation Blut" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB120101" />
+      <display value="Glukosetoleranztestprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB120102" />
+      <display value="Laborbefund extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB120103" />
+      <display value="Laborbefund intern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB120104" />
+      <display value="Anforderung Labor" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB120105" />
+      <display value="Überweisungsschein Labor" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB120199" />
+      <display value="Sonstiger Laborbefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB130101" />
+      <display value="Mikrobiologiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB130102" />
+      <display value="Urinbefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB220101" />
+      <display value="Befund über positive Infektionsmarker" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="LB220102" />
+      <display value="Virologiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP010101" />
+      <display value="Anästhesieprotokoll intraoperativ" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP010102" />
+      <display value="Aufwachraumprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP010103" />
+      <display value="Checkliste Anästhesie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP010199" />
+      <display value="Sonstige Anästhesiedokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150101" />
+      <display value="Chargendokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150102" />
+      <display value="OP-Anmeldungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150103" />
+      <display value="OP-Bericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150104" />
+      <display value="OP-Bilddokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150105" />
+      <display value="OP-Checkliste" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150106" />
+      <display value="OP-Protokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150107" />
+      <display value="Postoperative Verordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150108" />
+      <display value="OP-Zählprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150109" />
+      <display value="Dokumentation ambulantes Operieren" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP150199" />
+      <display value="Sonstige OP-Dokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP200101" />
+      <display value="Transplantationsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP200102" />
+      <display value="Spenderdokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="OP200199" />
+      <display value="Sonstige Transplantationsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT080101" />
+      <display value="Histologieanforderung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT080102" />
+      <display value="Histologiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT130101" />
+      <display value="Molekularpathologieanforderung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT130102" />
+      <display value="Molekularpathologiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT230199" />
+      <display value="Sonstige pathologische Dokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT260101" />
+      <display value="Zytologieanforderung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="PT260102" />
+      <display value="Zytologiebefund" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070101" />
+      <display value="Geburtenbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070102" />
+      <display value="Geburtenprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070103" />
+      <display value="Geburtenverlaufskurve" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070104" />
+      <display value="Neugeborenenscreening" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070105" />
+      <display value="Partogramm" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070106" />
+      <display value="Wiegekarte" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070107" />
+      <display value="Neugeborenendokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070108" />
+      <display value="Säuglingskurve" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070109" />
+      <display value="Geburtenbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070110" />
+      <display value="Perzentilkurve" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070111" />
+      <display value="Entnahme Nabelschnurblut" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070112" />
+      <display value="Datenblatt für den Pädiater" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070199" />
+      <display value="Sonstige Geburtendokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070201" />
+      <display value="Barthel Index" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070202" />
+      <display value="Dem Tect" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070203" />
+      <display value="ISAR Screening" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070204" />
+      <display value="Sturzrisikoerfassungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070205" />
+      <display value="Geriatrische Depressionsskala" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070206" />
+      <display value="Geriatrische Assessmentdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070207" />
+      <display value="Mobilitätstest nach Tinetti" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070208" />
+      <display value="Timed Up and Go Test" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD070299" />
+      <display value="Sonstiges geriatrisches Dokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110101" />
+      <display value="Geriatrische Komplexbehandlungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110102" />
+      <display value="Intensivmedizinische Komplexbehandlungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110103" />
+      <display value="MRE/Nicht-MRE Komplexbehandlung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110104" />
+      <display value="Neurologische Komplexbehandlungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110105" />
+      <display value="Palliativmedizinische Komplexbehandlungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110106" />
+      <display value="PKMS-Dokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110107" />
+      <display value="Dokumentation COVID" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD110199" />
+      <display value="Sonstige Komplexbehandlungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD130101" />
+      <display value="Vertrag Maßregelvollzug" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD130102" />
+      <display value="Antrag Maßregelvollzug" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD130103" />
+      <display value="Schriftverkehr Maßregelvollzug" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD130104" />
+      <display value="Einwilligung/Einverständniserklärung Maßregelvollzug" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD130199" />
+      <display value="Sonstiges Maßregelvollzugdokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD150101" />
+      <display value="Follow up-Bogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD150102" />
+      <display value="Meldebogen Krebsregister" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD150103" />
+      <display value="Tumorkonferenzprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD150104" />
+      <display value="Tumorlokalisationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD150199" />
+      <display value="Sonstiger onkologischer Dokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160101" />
+      <display value="Patientenaufzeichnungen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160102" />
+      <display value="Testpsychologische Diagnostik" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160103" />
+      <display value="Psychiatrisch-psychotherapeutische Therapieanordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160104" />
+      <display value="Psychiatrisch-psychotherapeutische Therapiedokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160105" />
+      <display value="Psychiatrisch-psychotherapeutischer Verlaufsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160106" />
+      <display value="Spezialtherapeutische Verlaufsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160107" />
+      <display value="Therapieeinheiten Ärzte/Psychologen/Spezialtherapeuten" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160108" />
+      <display value="1:1 Betreuung/Einzelbetreuung/Psychiatrische Intensivbehandlung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160109" />
+      <display value="Checkliste für die Unterbringung psychisch Kranker" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160110" />
+      <display value="Dokumentation Verhaltensanalyse" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160111" />
+      <display value="Dokumentation Depression" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160112" />
+      <display value="Dokumentation Stationsäquivalente Behandlung (StäB)" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SD160199" />
+      <display value="Sonstiges psychiatrisch-psychotherapeutisches Dokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF060101" />
+      <display value="Forschungsbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF060199" />
+      <display value="Sonstige Forschungsdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190101" />
+      <display value="CRF-Bogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190102" />
+      <display value="Einwilligung Studie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190103" />
+      <display value="Protokoll Ein- und Ausschlusskriterien" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190104" />
+      <display value="Prüfplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190105" />
+      <display value="SOP-Bogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190106" />
+      <display value="Studienbericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="SF190199" />
+      <display value="Sonstige Studiendokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH020101" />
+      <display value="Bestrahlungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH020102" />
+      <display value="Bestrahlungsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH020103" />
+      <display value="Bestrahlungsverordnung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH020104" />
+      <display value="Radiojodtherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH020105" />
+      <display value="Therapieprotokoll mit Radionukliden" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH020199" />
+      <display value="Sonstiges Bestrahlungstherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060101" />
+      <display value="Ergotherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060102" />
+      <display value="Logopädieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060103" />
+      <display value="Physiotherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060104" />
+      <display value="Anforderung Funktionstherapie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060105" />
+      <display value="Elektrokonvulsionstherapie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060106" />
+      <display value="Transkranielle Magnetstimulation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH060199" />
+      <display value="Sonstiges Funktionstherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130101" />
+      <display value="Anforderung Medikation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130102" />
+      <display value="Apothekenbuch" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130103" />
+      <display value="Chemotherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130104" />
+      <display value="Hormontherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130105" />
+      <display value="Medikamentenplan extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130106" />
+      <display value="Medikamentenplan intern/extern (mit BTM)" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130107" />
+      <display value="Medikamentenplan intern/extern" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130108" />
+      <display value="Rezept" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130109" />
+      <display value="Schmerztherapieprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130110" />
+      <display value="Prämedikationsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130111" />
+      <display value="Lyse Dokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH130199" />
+      <display value="Sonstiges Dokument medikamentöser Therapie" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH160101" />
+      <display value="Protokoll Ernährungsberatung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH160199" />
+      <display value="Sonstiges Protokoll Patientenschulung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH200101" />
+      <display value="Anforderung Blutkonserven" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH200102" />
+      <display value="Blutspendeprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH200103" />
+      <display value="Bluttransfusionsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH200104" />
+      <display value="Konservenbegleitschein" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH200199" />
+      <display value="Sonstiges Transfusionsdokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="TH230199" />
+      <display value="Sonstige Therapiedokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010101" />
+      <display value="Dekubitusrisikoeinschätzung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010102" />
+      <display value="Mini Mental Status Test inkl. Uhrentest" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010103" />
+      <display value="Schmerzerhebungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010104" />
+      <display value="Ernährungsscreening" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010105" />
+      <display value="Aphasiescreening" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010106" />
+      <display value="Glasgow Coma Scale" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010107" />
+      <display value="NIH Stroke Scale" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010108" />
+      <display value="IPSS (Internationaler Prostata Symptom Score)" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL010199" />
+      <display value="Sonstiger Assessmentbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040101" />
+      <display value="Diabetiker Kurve" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040102" />
+      <display value="Insulinplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040199" />
+      <display value="Sonstige Diabetesdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040201" />
+      <display value="Dialyseanforderung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040202" />
+      <display value="Dialyseprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040299" />
+      <display value="Sonstige Dialysedokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040301" />
+      <display value="Ein- und Ausfuhrprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040302" />
+      <display value="Fixierungsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040303" />
+      <display value="Isolierungsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040304" />
+      <display value="Lagerungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040305" />
+      <display value="Punktionsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040306" />
+      <display value="Punktionsprotokoll therapeutisch" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040307" />
+      <display value="Reanimationsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040308" />
+      <display value="Sondenplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040309" />
+      <display value="Behandlungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040310" />
+      <display value="Infektionsdokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040311" />
+      <display value="Nosokomialdokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040312" />
+      <display value="Stomadokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040313" />
+      <display value="Katheterdokument" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040314" />
+      <display value="Kardioversion" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL040399" />
+      <display value="Sonstiger Durchführungsnachweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL090101" />
+      <display value="Beatmungsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL090102" />
+      <display value="Intensivkurve" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL090103" />
+      <display value="Intensivpflegebericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL090104" />
+      <display value="Monitoringausdruck" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL090105" />
+      <display value="Intensivdokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL090199" />
+      <display value="Sonstiger Intensivdokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160101" />
+      <display value="Auszug aus den medizinischen Daten" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160102" />
+      <display value="Ernährungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160103" />
+      <display value="Meldebogen Krebsregister" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160104" />
+      <display value="Pflegeanamnesebogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160105" />
+      <display value="Pflegebericht" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160106" />
+      <display value="Pflegekurve" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160107" />
+      <display value="Pflegeplanung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160108" />
+      <display value="Pflegeüberleitungsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160109" />
+      <display value="Sturzprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160110" />
+      <display value="Überwachungsprotokoll" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160111" />
+      <display value="Verlaufsdokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160112" />
+      <display value="Pflegevisite" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160113" />
+      <display value="Fallbesprechung Bezugspflegekraft" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160114" />
+      <display value="Pflegenachweis" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160115" />
+      <display value="Fotodokumentation Dekubitus" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL160199" />
+      <display value="Sonstiger Pflegedokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL230101" />
+      <display value="Wunddokumentationsbogen" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL230102" />
+      <display value="Bewegungs- und Lagerungsplan" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL230103" />
+      <display value="Fotodokumentation Wunden" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="VL230199" />
+      <display value="Sonstige Wunddokumentation" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="UB999996" />
+      <display value="Nachweise (Zusatz-) Entgelte" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="UB999997" />
+      <display value="Gesamtdokumentation stationäre Versorgung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="UB999998" />
+      <display value="Gesamtdokumentation ambulante Versorgung" />
+    </contains>
+    <contains>
+      <system value="http://dvmd.de/fhir/CodeSystem/kdl" />
+      <code value="UB999999" />
+      <display value="Sonstige medizinische Dokumentation" />
+    </contains>
+  </expansion>
+</ValueSet>

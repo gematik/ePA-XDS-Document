@@ -49,10 +49,13 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.1.0
+  version: 1.1.1
 
   # version history:
   # ----------------
+  # version 1.1.1
+  #   - bugfix: removed additionalProperties from schemas
+  #   - added category 'transcripts' and 'diga' to category enum
   # version 1.1.0
   #   - removed user-specific deny policy
   #   - corrections for categoryId in enum and description
@@ -505,9 +508,11 @@ components:
         - vaccination
         - patient
         - receipt
+        - diga
         - care
         - eau
         - rehab
+        - transcripts
         - other
       example: emergency
     DenyPolicyAssignmentType:
@@ -545,8 +550,6 @@ components:
               allOf:
                 - $ref: '#/components/schemas/CategoryIdType'
               description: technical identifier of category
-          additionalProperties: false
-      additionalProperties: false
     GDPolicyAssignmentForDocumentType:
       description: Global deny policy assigment for a single document.
       type: object
@@ -564,8 +567,6 @@ components:
               allOf:
                 - $ref: '#/components/schemas/RootDocumentIdType'
               description: rootDocumentUniqueId from DocumentEntry.referenceIdList
-          additionalProperties: false
-      additionalProperties: false
     GDPolicyAssignmentForFolderType:
       description: Global deny policy assigment for a single folder.
       type: object
@@ -583,8 +584,6 @@ components:
               allOf:
                 - $ref: '#/components/schemas/UuidType'
               description: Folder.entryUUID
-          additionalProperties: false
-      additionalProperties: false
     UserAgentType:
       description: "Information about client software with: ClientId(20 characters) + / + VersionNumber (1 to 15 characters)."
       type: string

@@ -1,6 +1,13 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.0.1
+- release ePA-3.0.1
+- (all changes from changelist 'ePAfueralle_3.0.1' and final review)
+### changes
+- bugfix: removed additionalProperties (all occurences) in I_Constraint_Management_Insurant.yaml 
+- removed phrase "für ePA 1.0 und ePA 2.0" from description in value-sets
+- added category 'transcipts' and 'diga' in I_Constraint_Management_Insurant.yaml
 ## Release 3.0.1 RC
 - release candidate ePA-3.0.1
 ### changes
