@@ -49,10 +49,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.1.1
+  version: 1.1.2
 
   # version history:
   # ----------------
+  # version 1.1.2
+  #   - changed http-statuscode in description of operation setDenyPolicyAssignment to 201
   # version 1.1.1
   #   - bugfix: removed additionalProperties from schemas
   #   - added category 'transcripts' and 'diga' to category enum
@@ -254,7 +256,7 @@ paths:
 
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
-        | Successful operation | 200 |||
+        | Successful operation | 201 |||
         | Request does not match schema | 400 | malformedRequest ||
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||

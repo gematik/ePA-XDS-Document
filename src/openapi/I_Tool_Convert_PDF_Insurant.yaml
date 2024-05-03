@@ -31,10 +31,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.0.1
+  version: 1.1.0
 
   # version history:
   # ----------------
+  # version 1.1.0
+  #   - changed http-statuscode in operation convertPDF to 201
   # version 1.0.1
   #   - removed base64 format requirement for PDFs
   # version 1.0.0
@@ -80,7 +82,7 @@ paths:
 
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
-        | Successful operation | 200 |||
+        | Successful operation | 201 |||
         | Request does not match schema | 400 | malformedRequest ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Cannot convert | 422 | unprocessable | Origin PDF cannot be converted |
@@ -102,7 +104,7 @@ paths:
                 example: 
                   input: 'a PDF file for conversion to a PDF7A format'
       responses:
-        "200":
+        "201":
           description: Ok
           content:
             application/pdf:
