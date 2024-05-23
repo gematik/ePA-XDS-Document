@@ -1,6 +1,9 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.0.1-2
+### changes
+- bugfix regex UserAgentType (C_11780)
 ## Release 3.0.1-1
 ### changes
 - changed http-statuscodes from 200 to 201 in openapis (C_11811)
