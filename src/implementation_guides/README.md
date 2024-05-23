@@ -1,7 +1,7 @@
 # Hinweise zu dem Implementation Guides
 
 Die Implementation Guides (IG) geben verbindlich XDS-Metadaten für die Verwendung von strukturierten Dokumenten im Kontext der ePA vor.
-Metadaten, die in der IG aufgeführt sind, müssen von Primärsystemen für das Einstellen von strukturierten Dokumenten verwendet werden, nicht aufgeführte Metadaten können unter Berücksichtigung der Vorgaben der Spezifikation gemSpec_DM_ePA, Anforderung A_14760-* "Nutzungsvorgaben für die Verwendung von XDS-Metadaten" frei vergeben werden.
+Metadaten, die in der IG aufgeführt sind, müssen von Primärsystemen für das Einstellen von strukturierten Dokumenten verwendet werden, nicht aufgeführte Metadaten können unter Berücksichtigung der Vorgaben, Anforderung A_14760-* "Nutzungsvorgaben für die Verwendung von XDS-Metadaten", frei vergeben werden.
 
 ## Versionen der strukturuierten Dokumente
 Eine IG definiert die Metadaten, insbesondere den formatCode, immer für eine bestimmte Version eines strukturierten Dokuments. Für neue strukturierte Dokumente oder neue Versionen von strukturierten Dokumenten wird jeweils eine eigene IG neu veröffentlicht.
