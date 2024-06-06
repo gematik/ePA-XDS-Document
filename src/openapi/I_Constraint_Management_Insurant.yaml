@@ -533,10 +533,8 @@ components:
             assignmentId:
               allOf:
                 - $ref: '#/components/schemas/AssignmentIdType'
-        - oneOf:
-            - $ref: '#/components/schemas/GDPolicyAssignmentForDocumentType'
-            - $ref: '#/components/schemas/GDPolicyAssignmentForFolderType'
-            - $ref: '#/components/schemas/GDPolicyAssignmentForCategoryType'
+            assignment:
+              $ref: '#/components/schemas/DenyPolicyAssignmentType'
     GDPolicyAssignmentForCategoryType:
       description: Global deny policy assigment for a single category.
       type: object
@@ -624,9 +622,10 @@ components:
       summary: Response of assigment for a category in General Deny Policy
       value:
         assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
-        for: category
-        parameters:
-          categoryId: patient
+        assignment:
+          for: category
+          parameters:
+            categoryId: patient
     Add_document_to_general_deny_policy:
       summary: Set an assigment for a document in General Deny Policy
       value:
@@ -637,9 +636,10 @@ components:
       summary: Response of assigment for a document in General Deny Policy
       value:
         assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
-        for: document
-        parameters:
-          rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+        assignment:
+          for: document
+          parameters:
+            rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
     Add_folder_to_general_deny_policy:
       summary: Set an assigment for a folder in General Deny Policy
       value:
@@ -650,9 +650,10 @@ components:
       summary: Response of assigment for a folder in General Deny Policy
       value:
         assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
-        for: folder
-        parameters:
-          folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
+        assignment:
+          for: folder
+          parameters:
+            folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
     Get_AllPolicyAssignments:
       summary: Get all Deny Policy assignments.
       value:
@@ -662,29 +663,35 @@ components:
           totalMatching: 6
         data:
           - assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
-            for: category
-            parameters:
-              categoryId: patient
+            assignment:
+              for: category
+              parameters:
+                categoryId: patient
           - assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
-            for: document
-            parameters:
-              rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+            assignment:
+              for: document
+              parameters:
+                rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
           - assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
-            for: folder
-            parameters:
-              folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
+            assignment:
+              for: folder
+              parameters:
+                folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
           - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-            for: category
-            parameters:
-              categoryId: dental
+            assignment:
+              for: category
+              parameters:
+                categoryId: dental
           - assignmentId: 74343201-e669-4675-8414-3ce517220a3b
-            for: document
-            parameters:
-              rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+            assignment:
+              for: document
+              parameters:
+                rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
           - assignmentId: 7730578d-9380-47d6-ae82-d2c47ca399af
-            for: folder
-            parameters:
-              folderUUID: urn:uuid:f9929ed6-1119-4dea-a48a-1cfe8117f7b7
+            assignment:
+              for: folder
+              parameters:
+                folderUUID: urn:uuid:f9929ed6-1119-4dea-a48a-1cfe8117f7b7
     Get_QueryForCategory:
       summary: Get all Deny Policy assignments for category dental.
       value:
@@ -694,6 +701,7 @@ components:
           totalMatching: 1
         data:
           - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-            for: category
-            parameters:
-              categoryId: dental
+            assignment:
+              for: category
+              parameters:
+                categoryId: dental
