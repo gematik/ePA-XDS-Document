@@ -508,6 +508,7 @@ components:
         - eab
         - dental
         - child
+        - childsrecord
         - pregnancy_childbirth
         - vaccination
         - patient

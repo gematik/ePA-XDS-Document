@@ -14,7 +14,7 @@
         <system value="urn:ietf:rfc:3986"/>
         <value value="urn:oid:1.2.276.0.76.11.467"/>
     </identifier>
-    <version value="3.1.0"/>
+    <version value="3.1.1"/>
     <name value="value-set-of-specialty-oth-codes"/>
     <title value="Value Set of Specialty OTH Codes"/>
     <status value="active"/>
@@ -58,6 +58,13 @@
                 <code value="dental"/>
                 <display value="Zahnbonusheft"/>
             </concept>
+            <concept>
+                <extension url="http://hl7.org/fhir/StructureDefinition/valueset-concept-comments">
+                    <valueString value="Daten gemäß der nach § 92 Absatz 1 Satz 2 Nummer 3 und Absatz 4 in Verbindung mit § 26 beschlossenen Richtlinie des Gemeinsamen Bundesausschusses zur Früherkennung von Krankheiten bei Kindern (elektronisches Untersuchungsheft für Kinder)"/>
+                </extension>
+                <code value="childsrecord"/>
+                <display value="Kinderuntersuchungsheft"/>
+            </concept>            
             <concept>
                 <extension url="http://hl7.org/fhir/StructureDefinition/valueset-concept-comments">
                     <valueString value="Daten gemäß der nach § 92 Absatz 1 Satz 2 Nummer 3 und Absatz 4 in Verbindung mit § 26 beschlossenen Richtlinie des Gemeinsamen Bundesausschusses zur Früherkennung von Krankheiten bei Kindern (elektronisches Untersuchungsheft für Kinder)"/>
