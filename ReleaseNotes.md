@@ -1,13 +1,17 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.1.0 RC
+- release candidate ePA-3.1.0 
+### changes
+- added http header-parameter for soap messages of IHE operations for EU-Access 
 ## Release 3.0.2
-relese ePA-3.0.2
+- release ePA-3.0.2
 ### changes
 - changed cardinality for documents according to ig-dpe.json, ig-nfd.json and ig-emp.json (C_11889)
 - added support for childsrecord data category
 ## Release 3.0.2-alpha.1
-pre-release epa 3.0.2
+- pre-release epa 3.0.2
 ### changes
 - no changes compared to 3.0.1.2
 ## Release 3.0.1-2
