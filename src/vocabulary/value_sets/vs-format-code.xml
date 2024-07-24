@@ -294,20 +294,6 @@
 				<display value="PDF/A-2"/>
 			</concept>
 			<concept>
-				<extension url="http://hl7.org/fhir/StructureDefinition/valueset-concept-comments">
-					<valueString value="PDF Format für die elektronische Archivierung nach ISO 19005-3"/>
-				</extension>
-				<code value="urn:ihe-d:spec:PDF_A3:2012"/>
-				<display value="PDF/A-3"/>
-			</concept>
-			<concept>
-				<extension url="http://hl7.org/fhir/StructureDefinition/valueset-concept-comments">
-					<valueString value="Barrierefreies PDF nach ISO 14289"/>
-				</extension>
-				<code value="urn:ihe-d:spec:PDF_UA:2008"/>
-				<display value="PDF/UA"/>
-			</concept>
-			<concept>
 				<extension url="http://hl7.org/fhir/StructureDefinition/valueset-deprecated">
 					<valueBoolean value="true"/>
 				</extension>
@@ -503,7 +489,7 @@
 			<concept>
 				<code value="urn:gematik:ig:Pflegeueberleitungsbogen:v1.0"/>
 				<display value="Pflegeüberleitungsbogen (gematik)"/>
-			</concept>	
+			</concept>
 			<concept>
 				<code value="urn:gematik:ig:DMP-Rheuma:v1"/>
 				<display value="eDMP Rheumatoide Arthritis (gematik)"/>
