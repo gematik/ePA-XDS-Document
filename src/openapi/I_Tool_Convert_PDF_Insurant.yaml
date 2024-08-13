@@ -31,10 +31,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.1.1
+  version: 1.1.2
 
   # version history:
   # ----------------
+  # version 1.1.2
+  #   - editorial fix examples
   # version 1.1.1
   #   - bugfix UserAgentType
   # version 1.1.0
@@ -104,7 +106,7 @@ paths:
                 type: string
                 format: binary
                 example: 
-                  input: 'a PDF file for conversion to a PDF7A format'
+                  'a PDF file for conversion to a PDF7A format'
       responses:
         "201":
           description: Ok
@@ -115,7 +117,7 @@ paths:
                 type: string
                 format: binary
               example: 
-                output: 'a converted file in PDF/A format'
+                'a converted file in PDF/A format'
         '400':
           $ref: '#/components/responses/Error400BadRequest'
         '403':

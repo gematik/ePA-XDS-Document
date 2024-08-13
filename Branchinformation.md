@@ -10,13 +10,12 @@
 | Release date   | __2024-07-12__  |
 | Specifications| [Fachportal gematik: ePA 3.0.2](https://gemspec.gematik.de/releases/ePA_3_0_2/)|
 | Previous release| __Release 3.0.1__|
-| Previous branch | [**ePA-3.0.1**](https://github.com/gematik/epa-basic/tree/ePA-3.0.1)|
-| Follow-up | ePA-3.1.0 (planned)|
+| Previous branch | [**ePA-3.0.1**](https://github.com/gematik/epa-xds-document/tree/ePA-3.0.1)|
+| Follow-up | [**ePA-3.1.0**](https://github.com/gematik/epa-xds-document/tree/ePA-3.1.0)|
 | Associated repositories:||
 | Medication Service | [**ePA-Medication (3.0.2)**](https://github.com/gematik/ePA-Medication/tree/ePA-3.0.2) |
 | Basic Services | [**ePA-Basic (3.0.2)**](https://github.com/gematik/ePA-Basic/tree/ePA-3.0.2) |
 | Account Relocation | [**ref-ePA-HealthRecordMigration (3.0)**](https://github.com/gematik/ref-ePA-HealthRecordMigration/tree/ePA-3.0) |
-
 
 </br>
 
