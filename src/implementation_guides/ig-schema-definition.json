@@ -1,7 +1,7 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$ref": "#/definitions/StructureDefinition",
-	"$version": "1.2.1",
+	"$version": "1.2.2",
 	"definitions": {
 		"CardinalityDefinition": {
 			"description": "Constraints on the amount of the XDS folder or document in order to support that structured document in the electronic health record system.",
@@ -165,15 +165,6 @@
 				"maxDocumentHistory": {
 					"description": "Defines the maximum amount of deprecated elements to be kept in a XDS RPLC chain (approved document does not count). Oldest entries may be deleted when this limit gets exeeded",
 					"type": "integer"
-				},
-				"deidentification": {
-					"description": "Provides all information to de-identify (anonymize) a FHIR document of the associated FHIR profile. All FHIR elements addressed by a FHIRPath in the list 'allowList' shall be applied in order to de-identify the document without changing its content.",
-					"type": "object",
-					"properties": {
-						"allowList": {
-							"$ref": "#/definitions/DeidentificationDefinition"
-						}
-					}
 				}
 			},
 			"required": [
@@ -250,30 +241,6 @@
 				"validFromDate",
 				"elements"
 			]
-		},
-		"DeidentificationDefinition": {
-			"description": "a list of fhir path elements arranged as list of paths for each possible profile",
-			"type": "array",
-			"items": {
-				"type": "object",
-				"properties": {
-					"profile": {
-						"description": "Profile canocial-url",
-						"type": "string"
-					},
-					"fhir": {
-						"description": "Resource profile specific list of fhir path entries defining allowed elements for research data submission. An addressed element shall appear in a pseudonymized document with the same path and including all child elements.",
-						"type": "array",
-						"items": {
-							"type": "string"
-						}
-					}
-				},
-				"required": [
-					"profile",
-					"fhir"
-				]
-			}
 		}
 	}
 }

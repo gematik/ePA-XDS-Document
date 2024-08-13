@@ -49,10 +49,15 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.1.3
+  version: 1.2.0
 
   # version history:
   # ----------------
+  # version 1.2.0
+  #   - removed paging from getDenyPolicyAssignments
+  #   - updated list of relevant oids (editorial)
+  # version 1.1.4
+  #   - added childsrecord category
   # version 1.1.3
   #   - bugfix UserAgentType
   # version 1.1.2
@@ -99,6 +104,10 @@ tags:
       - oid_institution-oegd
       - oid_institution-arbeitsmedizin
       - oid_diga
+      - oid_praxis-ergotherapeut
+      - oid_praxis-logopaede
+      - oid_praxis-podologe
+      - oid_praxis-ernaehrungstherapeut
 
       **Restricted categories and folders**:</br>
       Some categories/folders of a health record may contain MIOs or structured documents represented by more 
@@ -133,43 +142,18 @@ paths:
       - $ref: '#/components/parameters/insurantid'
       - $ref: '#/components/parameters/useragent'
     get:
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/for'
-        - $ref: '#/components/parameters/categories'
-        - $ref: '#/components/parameters/documents'
-        - $ref: '#/components/parameters/folders'
       tags:
         - ConstraintManagement
       operationId: getDenyPolicyAssignments
       summary: (getDenyPolicyAssignments) get a list of actual set deny policy assignments
       description: |
-        Get a combined list of actual set assignments of the general deny policy.</br>  
+        Get a list of actual set assignments of the general deny policy.</br>  
         This operation is limited to entitled users of role oid_versicherter.
         
         **Client**:</br>
-        A client shall consider the schema for 'Queries' and 'Paging' (see below).
 
         **Provider**:</br>
-        The returned list shall contain only assignments matching the query parameters of the 
-        general deny policy.</br>
-
-        Paging:</br>
-        _offset_ and _limit_ parameters shall be related to the amount of assignments matching the query and only occur 
-        once in a request. Default shall be for _offset_ = 0 and for _limit_ = 50 (this shall also be the maximum _limit_).
-        The applied _offset_ and _limit_ and the total amount of matching assignments shall be part of the response.</br>
-        _offset_ shall be a "page-offset" and is related to _limit_ which is the "page-size", e.g. if total amount of 
-        matching assignments is 75, than _offset_ = 0 with _limit_ = 40 return result 1 to 40 and _offset_ = 1 with _limit_ 
-        = 40 return result 41 to 75 and _offset_ = 2 with _limit_ = 40 return an 'empty' result.  
-        
-        Queries:</br>
-        Different query parameters (name) shall be applied as logical AND, multiple query strings (same name) 
-        as OR. Default for all query parameters is ("*").
-        Queries for _folders_ shall use urn.encoded uuids (use urn:uuid:65e2a7a3-b46f-40f4-b821-4efc23a57400 instead 
-        of 65e2a7a3-b46f-40f4-b821-4efc23a57400).</br>
-        Queries for _documents_ shall use identifiers matching the referenceId schema 
-        'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' ('uniqueId' equals also the documentEntry.uniqueId (a uuid)). 
+        The returned list shall contains a list of actual set assignments of the general deny policy.</br>
 
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
@@ -194,18 +178,6 @@ paths:
               schema:
                 type: object
                 properties:
-                  query:
-                    type: object
-                    properties:
-                      offset:
-                        description: applied offset to matching results
-                        type: integer
-                      limit:
-                        description: applied limit to matching results
-                        type: integer
-                      totalMatching:
-                        description: total amount of matching results in policies
-                        type: integer
                   data:
                     type: array
                     items:
@@ -214,8 +186,6 @@ paths:
               examples:
                 getAll:
                   $ref: '#/components/examples/Get_AllPolicyAssignments'
-                FilterCategory:
-                  $ref: '#/components/examples/Get_QueryForCategory'
         '400':
           $ref: '#/components/responses/Error400BadRequest'
         '403':
@@ -438,58 +408,12 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/AssignmentIdType'
-    limit:
-      name: limit
-      in: query
-      description: Limits the number of matching items in a response ('pagesize', default and max = 50).
-      schema:
-        type: integer
-        maximum: 50
-        minimum: 1
-    offset:
-      name: offset
-      in: query
-      description: Specifies skipped matching pages ('pagesize' == limit), (default = 0).
-      schema:
-        type: integer
-    for:
-      name: for
-      in: query
-      description: Query for deny policy assignments hiding categories or documents or folders
-      schema:
-        $ref: '#/components/schemas/ForType'
-    categories:
-      name: parameters.categoryId
-      in: query
-      description: Query for deny policy assignment hiding a specific category.
-      schema:
-        $ref: '#/components/schemas/CategoryIdType'
-    documents:
-      name: parameters.rootDocumentId
-      in: query
-      description: Query for deny policy assignment hiding a specific document.
-      schema:
-        $ref: '#/components/schemas/RootDocumentIdType'
-    folders:
-      name: parameters.folderUUID
-      in: query
-      description: Query for deny policy assignment hiding a specific folder.
-      schema:
-        $ref: '#/components/schemas/UuidType'
   schemas:
     AssignmentIdType:
       description: Server-assigned unique uuid of a particular deny policy assignment
       type: string
       format: uuid
       example: fa2bc929-f6c9-419f-ae75-cea040927651
-    ForType:
-      description: Select an assignment type
-      type: string
-      enum:
-        - category
-        - document
-        - folder
-      example: category
     UuidType:
       description: An urn-encoded UUID
       type: string
@@ -657,10 +581,6 @@ components:
     Get_AllPolicyAssignments:
       summary: Get all Deny Policy assignments.
       value:
-        query:
-          offset: 0
-          limit: 50
-          totalMatching: 6
         data:
           - assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
             for: category
@@ -686,15 +606,3 @@ components:
             for: folder
             parameters:
               folderUUID: urn:uuid:f9929ed6-1119-4dea-a48a-1cfe8117f7b7
-    Get_QueryForCategory:
-      summary: Get all Deny Policy assignments for category dental.
-      value:
-        query:
-          offset: 0
-          limit: 50
-          totalMatching: 1
-        data:
-          - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
-            for: category
-            parameters:
-              categoryId: dental
