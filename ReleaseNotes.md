@@ -1,12 +1,27 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.1.0
+release ePA-3.1.0
+### changes
+- integrate all changes from ePA-3.0.2-1:
+    - removed paging in I_Constraint_Management_Insurant.yaml
+    - editorial changes in I_Constraint_Management_Insurant.yaml and I_Tool_Convert_PDF_Insurant.yaml
+    - removed unused 'Deidentifier' schema part from ig-schema-definition.json
+- removed PDF/A-3 and PDF/UA from value set.
+- change 'validFrom' date in ig_epka_v_1_0.json
+- fixed 'displayNames' in ig-medical-image.json
 ## Release 3.1.0 RC
 - release candidate ePA-3.1.0 
 ### changes
 - added http header-parameter for soap messages of IHE operations for EU-Access 
+## Release 3.0.2-1
+### changes
+- removed paging in I_Constraint_Management_Insurant.yaml
+- editorial changes in I_Constraint_Management_Insurant.yaml and I_Tool_Convert_PDF_Insurant.yaml
+- removed unused 'Deidentifier' schema part from ig-schema-definition.json
 ## Release 3.0.2
-- release ePA-3.0.2
+release ePA-3.0.2
 ### changes
 - changed cardinality for documents according to ig-dpe.json, ig-nfd.json and ig-emp.json (C_11889)
 - added support for childsrecord data category
