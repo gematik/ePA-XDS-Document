@@ -38,7 +38,7 @@ endif::[]
 
 // --- PDF theme options ---
 // :revdate: 30.01.2024
-:revnumber: 3.0.1
+:revnumber: 3.1.0
 :document-title: XDS Document Service der "ePA für alle"
 :document-subtitle: gemKPT_ePAfuerAlleXdsDoc
 :organization: gematik GmbH
@@ -98,6 +98,12 @@ endif::[]
 |28.03.2024
 |1.2
 |Ergänzung Metadatenaktualisierung um Erstellungszeitpunkt; Veröffentlichung
+|gematik
+
+|3.1.0
+|14.08.2024
+|1.2
+|Veröffentlichung
 |gematik
 
 |===
