@@ -49,10 +49,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.2.0
+  version: 1.2.1
 
   # version history:
   # ----------------
+  # version 1.2.1
+  #   - editorial correction of rootDocumentId explanation and format
   # version 1.2.0
   #   - removed paging from getDenyPolicyAssignments
   #   - updated list of relevant oids (editorial)
@@ -218,7 +220,7 @@ paths:
         - a _category_ entry addressed by a technical identifier string (e.g. 'vaccination'), or</br>
         - a _folder_ entry addressed by folder.EntryUUID (urn-encoded uuid), or</br>
         - a _document_ entry addressed by an identifier 'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' as 
-        used in documentEntry.referenceIdList with 'uniqueId' the symbolic uuid of documentEntry.uniqueID.
+        used in documentEntry.referenceIdList of the document.
 
         The category "emp" shall not be hidden, neither shall single documents of this category be hidden.
         Assignment requests for this category or documents of this category shall be rejected.
@@ -422,7 +424,7 @@ components:
       description: |
         A CXi style identifier with schema 'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' with symbolic UUID as uniqueId
       type: string
-      example: 4fa70820-2384-4001-80a9-7bbd5e085efb^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+      example: urn:uuid:4fa70820-2384-4001-80a9-7bbd5e085efb^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
     CategoryIdType:
       description: A technical identifier of a category
       type: string
@@ -557,14 +559,14 @@ components:
       value:
         for: document
         parameters:
-          rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+          rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
     Response_document_to_general_deny_policy:
       summary: Response of assigment for a document in General Deny Policy
       value:
         assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
         for: document
         parameters:
-          rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+          rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
     Add_folder_to_general_deny_policy:
       summary: Set an assigment for a folder in General Deny Policy
       value:
@@ -589,7 +591,7 @@ components:
           - assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
             for: document
             parameters:
-              rootDocumentId: 0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+              rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
           - assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
             for: folder
             parameters:
@@ -601,7 +603,7 @@ components:
           - assignmentId: 74343201-e669-4675-8414-3ce517220a3b
             for: document
             parameters:
-              rootDocumentId: c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+              rootDocumentId: urn:uuid:c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
           - assignmentId: 7730578d-9380-47d6-ae82-d2c47ca399af
             for: folder
             parameters:
