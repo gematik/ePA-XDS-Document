@@ -1,10 +1,13 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.0.2-2
+### changes
+- editorial correction regarding rootDocumentId format and content in I_Constraint_Management_Insurant.yaml (C_11987)
 ## Release 3.0.2-1
 ### changes
-- removed paging in I_Constraint_Managemnet_Insurant.yaml
-- editorial changes in I_Constraint_Managemnet_Insurant.yaml and I_Tool_Convert_PDF_Insurant.yaml
+- removed paging in I_Constraint_Management_Insurant.yaml
+- editorial changes in I_Constraint_Management_Insurant.yaml and I_Tool_Convert_PDF_Insurant.yaml
 - removed unused 'Deidentifier' schema part from ig-schema-definition.json
 ## Release 3.0.2
 release ePA-3.0.2
