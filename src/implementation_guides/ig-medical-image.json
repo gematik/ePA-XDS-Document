@@ -86,7 +86,7 @@
 					   {
 						"code": "MR",
 						"codeSystem": "1.2.840.10008.2.16.4",
-						"displayName": "Magnetic Resonance"
+						"displayName": "Magnetic Resonance MR"
 					   },
 					   {
 						"code": "NM",
@@ -96,7 +96,7 @@
 					   {
 						"code": "OCT",
 						"codeSystem": "1.2.840.10008.2.16.4",
-						"displayName": "Optical Coherence Tomography"
+						"displayName": "Optical Coherence Thomography"
 					   },
 					   {
 						"code": "OP",
