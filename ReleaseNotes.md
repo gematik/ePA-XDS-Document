@@ -1,6 +1,9 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.0.2-3
+### changes
+- reworked links to associated repositories
 ## Release 3.0.2-2
 ### changes
 - editorial correction regarding rootDocumentId format and content in I_Constraint_Management_Insurant.yaml (C_11987)
