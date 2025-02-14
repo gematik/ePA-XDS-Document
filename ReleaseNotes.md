@@ -1,6 +1,9 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA XDS Document
+## Release 3.1.0-2
+### changes
+- reworked links to associated repositories
 ## Release 3.1.0-1
 ### changes
 - integrate all changes from ePA-3.0.2-2:
