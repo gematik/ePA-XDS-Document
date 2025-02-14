@@ -39,6 +39,10 @@ info:
     **Log-Entries**
     Whenever a _Postcondition_ mandates a log-entry, this entry shall contain
     data as defined in A_24887*.
+    Log entry storage requires an entitled user for the related operation to 
+    ensure access to secure data storage. Therefore, log entry creation shall 
+    always be skipped and no log entry shall be stored if this precondition is 
+    not met.
 
   contact:
     name: gematik GmbH
@@ -49,10 +53,13 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.2.1
+  version: 1.2.2
 
   # version history:
   # ----------------
+  # version 1.2.2
+  #   - clarification regarding required entitlement for logging
+  #   - added error condition for not authenticated user sessions
   # version 1.2.1
   #   - editorial correction of rootDocumentId explanation and format
   # version 1.2.0
@@ -161,6 +168,7 @@ paths:
         |------------|-------------|------------|---------|
         | Successful operation | 200 |||
         | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
@@ -232,6 +240,7 @@ paths:
         |------------|-------------|------------|---------|
         | Successful operation | 201 |||
         | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | The addressed category is "emp"| 403 | invalidResource ||
@@ -314,6 +323,7 @@ paths:
         |------------|-------------|------------|---------|
         | Successful operation | 204 |||
         | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |

@@ -1,6 +1,27 @@
-<img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
- 
+<img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
+
 # Release Notes ePA XDS Document
+## Release 3.0.5
+### information
+This version 3.0.5 is the logically subsequent version of version 3.0.3 and incorporates the latest fixes, maintenance changes and changes published with version 3.1.0. 
+
+### changes
+- code systems and value sets from src/vocabulary moved to terminology package on Simplifier
+- added http status codes for not authorized user session in I_Constraint_Management-Insurant.yaml and I_Tools_Convert_PDF_insurant.yaml (C_11972)
+- updated kbv spec for eAU IG; also formally deprecated ancient version 1.0.2.
+- added requirement to use ED110104 in eventCodeList for ig-eau (C_12142)
+- clarification regarding required entitlement for logging in I_Constraint_Management_Insurant.yaml (C_12051)
+- added oid for code systems dicom and sct in vs-anatomic-region.xml (C_12126)
+- added new port I_Document_Management_Ncpeh for EU-Access in XDSDocumentService.wsdl (C_12080)
+- added format code of "Patientenkurzakte" to valueSet 1.3.6.1.4.1.19376.3.276.1.5.6 in vs-format-code.xml (C_12124)
+- Definition of Terminology for elements healthProfessionalRole and healthProfessionalRolechanged changed to FHIR-Package
+- fix description of category (folder) dental which in ePA 3 serves not only for "Zahnbonusheft" but for generic dental documentation as well (C_12111)
+- added http header-parameter for soap messages of IHE operations for EU-Access
+- integrate all changes from ePA-3.0.3:
+    - correction of WSDL port definition in XDSDocumentService.wsdl (C_12068)
+## Release 3.1.0-2
+### changes
+- reworked links to associated repositories
 ## Release 3.1.0-1
 ### changes
 - integrate all changes from ePA-3.0.2-2:
@@ -16,9 +37,7 @@ release ePA-3.1.0
 - change 'validFrom' date in ig_epka_v_1_0.json
 - fixed 'displayNames' in ig-medical-image.json
 ## Release 3.1.0 RC
-- release candidate ePA-3.1.0 
-### changes
-- added http header-parameter for soap messages of IHE operations for EU-Access 
+- release candidate ePA-3.1.0
 ## Release 3.0.2-1
 ### changes
 - removed paging in I_Constraint_Management_Insurant.yaml
@@ -43,14 +62,14 @@ release ePA-3.0.2
 - release ePA-3.0.1
 - (all changes from changelist 'ePAfueralle_3.0.1' and final review)
 ### changes
-- bugfix: removed additionalProperties (all occurences) in I_Constraint_Management_Insurant.yaml 
+- bugfix: removed additionalProperties (all occurences) in I_Constraint_Management_Insurant.yaml
 - removed phrase "für ePA 1.0 und ePA 2.0" from description in value-sets
 - added category 'transcipts' and 'diga' in I_Constraint_Management_Insurant.yaml
 ## Release 3.0.1 RC
 - release candidate ePA-3.0.1
 ### changes
-- removed user specific deny policy support (C_11681) 
-- added api for pdf to pdf/a conversion (C_11733) 
+- removed user specific deny policy support (C_11681)
+- added api for pdf to pdf/a conversion (C_11733)
 ## Release 3.0.0
 - release ePA-3.0
 ### changes

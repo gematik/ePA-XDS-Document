@@ -1,7 +1,7 @@
 {
 	"name": "Discharge Letter",
 	"description": "Discharge Letter defined by KBV acc. to § 383 SGB V",
-	"igVersion": "3.0.0",
+	"igVersion": "3.0.1",
 	"guidelineDefinition": {
 		"url": "https://www.kbv.de/media/sp/RL-eArztbrief.pdf"
 	},
@@ -67,6 +67,14 @@
 						"displayName": "Arztbrief § 291f SGB V"
 					}
 				},
+				{
+					"name": "documentEntry.eventCodeList",
+					"value": {
+						"code": "ED110104",
+						"codeSystem": "1.2.276.0.76.5.552",
+						"displayName": "eArztbrief"
+					}
+				},				
 				{
 					"name": "documentEntry.mimeType",
 					"value": [

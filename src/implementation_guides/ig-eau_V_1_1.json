@@ -1,10 +1,10 @@
 {
 	"name": "Incapacity to Work Certificate Version 1.1",
 	"description": "Nach § 73 Absatz 2 Satz 1 Nummer 9 ausgestellte Bescheinigung über eine Arbeitsunfähigkeit",
-	"igVersion": "3.0.0",
+	"igVersion": "3.0.1",
 	"guidelineDefinition": {
-		"url": "https://simplifier.net/packages/kbv.ita.eau/1.1.0/",
-		"version": "1.1.0"
+		"url": "https://simplifier.net/packages/kbv.ita.eau/1.1.1/",
+		"version": "1.1.1"
 	},
 	"folderCardinality": {
 		"min": "1",
