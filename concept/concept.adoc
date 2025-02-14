@@ -37,8 +37,8 @@ endif::[]
 :sectnums:
 
 // --- PDF theme options ---
-// :revdate: 30.01.2024
-:revnumber: 3.1.0
+// :revdate: 21.02.2025
+:revnumber: 3.0.5
 :document-title: XDS Document Service der "ePA für alle"
 :document-subtitle: gemKPT_ePAfuerAlleXdsDoc
 :organization: gematik GmbH
@@ -52,7 +52,7 @@ endif::[]
 
 ifdef::backend-pdf[]
 [.metadata]
-//Version: {revnumber}, 30.01.2024
+//Version: {revnumber}, 21.02.2025
 endif::[]
 
 
@@ -102,7 +102,13 @@ endif::[]
 
 |3.1.0
 |14.08.2024
-|1.2
+|
+|Veröffentlichung
+|gematik
+
+|3.0.5
+|21.02.2025
+|
 |Veröffentlichung
 |gematik
 
@@ -243,10 +249,6 @@ Der Versicherte/Vertreter wählt im ePA-FdV die zu verbergenden Datenkategorien 
 
 Der Versicherte/Vertreter wählt im ePA-FdV die zu verbergenden Dokumente aus. Das ePA-FdV übermittelt diese Dokumenten-IDs über eine spezifische Schnittstelle an den XDS Document Service, welcher sie in die General Deny Policy aufnimmt.
 
-
-=== Dokumentenspezifisches Verbergen von Dokumenten ggü. allen Leistungserbringerinstitutionen beim Einstellen durch eine Leistungserbringerinstitution
-
-Auf Wunsch des Versicherten stellt der Leistungserbringer ein Dokument verborgen ein. Dazu setzt er über sein Primärsystem das Metadatum "Confidentiality Code" auf den Wert "CON (Constraint)" und lädt das Dokument in den XDS Document Service hoch. Der XDS Document Service erkennt anhand des Codes, dass er dieses Dokument in die General Deny Policy aufnehmen muss. Eine eventuelle Aktualisierung eines bekannten, verborgenen Dokuments führt ebenso zu einer Aufnahme des neuen Dokuments in die General Deny Policy.
 
 <<<
 
