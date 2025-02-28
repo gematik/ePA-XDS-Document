@@ -53,10 +53,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.2.2
+  version: 1.2.3
 
   # version history:
   # ----------------
+  # version 1.2.3
+  #   - additional error condition for missing device registration 
   # version 1.2.2
   #   - clarification regarding required entitlement for logging
   #   - added error condition for not authenticated user sessions
@@ -169,6 +171,7 @@ paths:
         | Successful operation | 200 |||
         | Request does not match schema | 400 | malformedRequest ||
         | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
+        | Device registration does not exist | 403 | unregisteredDevice ||
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
@@ -243,6 +246,7 @@ paths:
         | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Device registration does not exist | 403 | unregisteredDevice ||
         | The addressed category is "emp"| 403 | invalidResource ||
         | The addressed document is part of category "emp"| 403 | invalidResource ||
         | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
@@ -325,6 +329,7 @@ paths:
         | Request does not match schema | 400 | malformedRequest ||
         | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
         | Requestor has no valid entitlement | 403 | notEntitled ||
+        | Device registration does not exist | 403 | unregisteredDevice ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
         | Assignment (_assignmentid_) does not exist | 404 | noResource ||

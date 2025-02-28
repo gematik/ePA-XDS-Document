@@ -1,10 +1,13 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
-## Release 3.0.5
-### information
+## information
 This version 3.0.5 is the logically subsequent version of version 3.0.3 and incorporates the latest fixes, maintenance changes and changes published with version 3.1.0. 
-
+## Release 3.0.5-1
+### changes
+- completed missing changes regarding status code for missing device registration in I_Constraint_Management_Insurant.yaml files (C_11972) 
+- removed allowance of unregistered devices for PDF conversion in I_Tool_Convert_PDF_insurant.yaml
+## Release 3.0.5-0
 ### changes
 - code systems and value sets from src/vocabulary moved to terminology package on Simplifier
 - added http status codes for not authorized user session in I_Constraint_Management-Insurant.yaml and I_Tools_Convert_PDF_insurant.yaml (C_11972)

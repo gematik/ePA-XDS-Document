@@ -56,7 +56,7 @@
 			<xs:element name="healthProfessionalRole">
 				<xs:annotation>
 					<xs:documentation>
-						Role of the health professional. NCPeH sets in this element the display name of the role only. Role and display Name MUST be taken from https://simplifier.net/packages/de.gematik.terminology/1.0.5
+						Role of the health professional. NCPeH sets in this element the display name of the role only. Role and display Name MUST be taken from https://gematik.de/fhir/terminology/ValueSet/epa-structural-role-of-healthcare-professional-vs|1.0.5
 					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
@@ -81,7 +81,7 @@
 			<xs:element name="healthcareFacilityType">
 				<xs:annotation>
 					<xs:documentation>
-							Healthcare Facility Type according to value set in https://simplifier.net/packages/de.gematik.terminology/1.0.5
+							Healthcare Facility Type according to value set in https://gematik.de/fhir/terminology/ValueSet/epa-ehealth-dsi-healthcare-facility-type-vs|1.0.5
 						</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
