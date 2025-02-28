@@ -19,14 +19,17 @@ This repository provides technical information for the Electronic Health Record 
 This branch relates to a particular release in context of **ePA version 3** ('ePA für alle') 
 The provided content comprises normative and supplementary resources for the **XDS Document Service**.
 
-For resources related to ePA data management and basic services see further associated repositories:
-(follow links in [Branchinformation.md](./Branchinformation.md))
-- **ePA-Medication** medication related resources</br>
-- **ePA-Basic** Basic services related resources</br>
 
+> [!IMPORTANT]  
+> The specification of value sets and code systems is no longer available in /src/vocabluary. These artifacts have been replaced by a terminology package (see Implementation Guide for Terminologies).
 
-The current branch accompanies a particular release of specification documents of ePA version 3 (a set of normative specification documents for components, product types and vendor types) published on [Fachportal Gematik](https://fachportal.gematik.de/) (see [Branchinformation.md](./Branchinformation.md) for specific version information and links).
-The content in /src is normative in context of requirements defined by those specification documents and is essential for product approvals. Any other content is for information. Normative content here, the associated repositories and the documents together form a single product release of the Electronic Health Record system for an approval process.
+For further resources related to an ePA release follow the link to 'Release documents' in [Branchinformation.md](./Branchinformation.md) and find 
+- **Specification documents**</br>
+- **GitHub**-repositories with resources for xds document, medication and more</br>
+- **Implementation Guides (IG)** for operations, including the FHIR based profiles 
+</br>
+
+The content of /src of this repository is normative in context of requirements defined by the specification documents and is essential for product approvals. Any other content here is for information. Normative content here, the associated further repositories, fhir packages, IGs and the documents together form a single product release of the Electronic Health Record system for an approval process.
 The affected and covered product types are **ePA-Aktensystem** and **ePA-Frontend des Versicherten**. 
 
 ## Release Notes
