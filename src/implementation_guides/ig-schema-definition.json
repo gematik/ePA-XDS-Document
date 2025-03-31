@@ -14,7 +14,7 @@
 					"type": "string"
 				},
 				"unique": {
-					"description": "The value 'true' means that solely one document/folder with the availablility status 'approved' is allowed to be registered with the given metadata combination. False means that multiple instances may be submitted.",
+					"description": "The value 'true' means that solely one document/folder with the availability status 'approved' is allowed to be registered with the given metadata combination. False means that multiple instances may be submitted.",
 					"type": "boolean"
 				}
 			},
