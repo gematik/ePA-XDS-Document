@@ -1,7 +1,7 @@
 {
 	"name": "Incapacity to Work Certificate Version 1.1",
 	"description": "Nach § 73 Absatz 2 Satz 1 Nummer 9 ausgestellte Bescheinigung über eine Arbeitsunfähigkeit",
-	"igVersion": "3.0.1",
+	"igVersion": "3.1.0",
 	"guidelineDefinition": {
 		"url": "https://simplifier.net/packages/kbv.ita.eau/1.1.1/",
 		"version": "1.1.1"
@@ -11,8 +11,7 @@
 		"max": "1",
 		"unique": true
 	},
-	"validFromDate": "2023-07-01",
-	"clientReadOnlyFromDate": "2025-07-15",
+	"validFromDate": "2025-07-15",
 	"metadata": {
 		"name": "folder.codeList",
 		"value": {
@@ -71,7 +70,6 @@
 				{
 					"name": "documentEntry.mimeType",
 					"value": [
-						"application/fhir+xml",
 						"application/pkcs7-mime"
 					]
 				}
