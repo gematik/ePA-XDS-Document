@@ -3,6 +3,9 @@
 # Release Notes ePA XDS Document
 ## information
 This version 3.0.5 is the logically subsequent version of version 3.0.3 and incorporates the latest fixes, maintenance changes and changes published with version 3.1.0. 
+## Release 3.0.5-5
+### changes
+- type of epka removed
 ## Release 3.0.5-4
 ### changes
 - rename ig-eau using sub-version
