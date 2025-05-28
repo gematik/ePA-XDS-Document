@@ -3,6 +3,16 @@
 # Release Notes ePA XDS Document
 ## information
 This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.2
+release ePA-3.1.2
+### changes
+- fix mimetypes for images in ig-medical-images.json
+- added X-Request-ID as required HTTP header parameter
+- switched to canonical URL for KDL code and deprecated code with OID in eab
+- integrate all changes from ePA-3.0.2-3, ePA-3.0.2-4 and ePA-3.0.5-5:
+    - type of epka removed
+    - rename ig-eau using sub-version
+    - mimetype for upload of eAU is restricted to pkcs#7
 ## Release 3.1.2 RC
 ### changes
 - branch introduction (no changes compared to 3.0.5-2)
