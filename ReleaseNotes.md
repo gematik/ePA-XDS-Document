@@ -2,20 +2,13 @@
 
 # Release Notes ePA XDS Document
 ## information
-This version 3.0.5 is the logically subsequent version of version 3.0.3 and incorporates the latest fixes, maintenance changes and changes published with version 3.1.0. 
-## Release 3.0.5-5
+This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.2 RC
 ### changes
-- type of epka removed
-## Release 3.0.5-4
-### changes
-- rename ig-eau using sub-version
-## Release 3.0.5-3
-### changes
-- mimetype for upload of eAU is restricted to pkcs#7
+- branch introduction (no changes compared to 3.0.5-2)
 ## Release 3.0.5-2
 ### changes
-- clarification regarding NFDM typecode in IG readme
-## Release 3.0.5-1
+- clarification regarding NFDM typecode in IG readme## Release 3.0.5-1
 ### changes
 - completed missing changes regarding status code for missing device registration in I_Constraint_Management_Insurant.yaml files (C_11972) 
 - removed allowance of unregistered devices for PDF conversion in I_Tool_Convert_PDF_insurant.yaml
