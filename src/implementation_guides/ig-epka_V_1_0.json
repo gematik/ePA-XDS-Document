@@ -1,7 +1,7 @@
 {
 	"name": "Patient Summary",
 	"description": "Patient summary defined as a medical information object (MIO) by KBV.",
-	"igVersion": "1.0.2",
+	"igVersion": "1.0.1",
 	"guidelineDefinition": {
 		"url": "https://mio.kbv.de/display/PKA1X0X0",
 		"version": "1.0.0"
@@ -12,6 +12,7 @@
 		"unique": true
 	},
 	"validFromDate": "2025-07-15",
+	"type": "atomic",
 	"metadata": {
 		"name": "folder.codeList",
 		"value": {
