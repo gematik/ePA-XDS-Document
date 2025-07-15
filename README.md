@@ -9,6 +9,7 @@
     <li><a href="#release-notes">Release Notes</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contributions">Contributions</a></li>
+    <li><a href="#additional-notes-and-disclaimer-from-gematik-gmbh">Additional Notes and Disclaimer</a></li>    
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>

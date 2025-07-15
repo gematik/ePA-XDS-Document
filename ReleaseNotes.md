@@ -3,6 +3,8 @@
 # Release Notes ePA XDS Document
 ## information
 This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.2-1
+- Clarification about health record states and associates conditions and error codes in 
 ## Release 3.1.2
 release ePA-3.1.2
 ### changes
