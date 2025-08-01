@@ -72,9 +72,18 @@
 					"value": {
 						"code": "ED110104",
 						"codeSystem": "1.2.276.0.76.5.552",
+						"displayName": "eArztbrief",
+						"deprecatedFrom": "2025-05-20"
+					}
+				},
+				{
+					"name": "documentEntry.eventCodeList",
+					"value": {
+						"code": "ED110104",
+						"codeSystem": "http://dvmd.de/fhir/CodeSystem/kdl",
 						"displayName": "eArztbrief"
 					}
-				},				
+				},
 				{
 					"name": "documentEntry.mimeType",
 					"value": [

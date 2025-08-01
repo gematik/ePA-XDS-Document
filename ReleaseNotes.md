@@ -2,20 +2,31 @@
 
 # Release Notes ePA XDS Document
 ## information
-This version 3.0.5 is the logically subsequent version of version 3.0.3 and incorporates the latest fixes, maintenance changes and changes published with version 3.1.0. 
-## Release 3.0.5-5
+This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.3 RC
 ### changes
-- type of epka removed
-## Release 3.0.5-4
+- removed concept (now integrated in concept in epa-basic)
+- set ig-emp.json deprecated as of 2026-03-01 
+- added statuscodes for state MAINTENANCE
+## Release 3.1.2-1
 ### changes
-- rename ig-eau using sub-version
-## Release 3.0.5-3
+- Clarification about health record states and associates conditions and error codes in 
+## Release 3.1.2
+release ePA-3.1.2
 ### changes
-- mimetype for upload of eAU is restricted to pkcs#7
+- fix mimetypes for images in ig-medical-images.json
+- added X-Request-ID as required HTTP header parameter
+- switched to canonical URL for KDL code and deprecated code with OID in eab
+- integrate all changes from ePA-3.0.2-3, ePA-3.0.2-4 and ePA-3.0.5-5:
+    - type of epka removed
+    - rename ig-eau using sub-version
+    - mimetype for upload of eAU is restricted to pkcs#7
+## Release 3.1.2 RC
+### changes
+- branch introduction (no changes compared to 3.0.5-2)
 ## Release 3.0.5-2
 ### changes
-- clarification regarding NFDM typecode in IG readme
-## Release 3.0.5-1
+- clarification regarding NFDM typecode in IG readme## Release 3.0.5-1
 ### changes
 - completed missing changes regarding status code for missing device registration in I_Constraint_Management_Insurant.yaml files (C_11972) 
 - removed allowance of unregistered devices for PDF conversion in I_Tool_Convert_PDF_insurant.yaml

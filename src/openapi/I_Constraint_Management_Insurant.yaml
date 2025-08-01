@@ -36,6 +36,12 @@ info:
     not essentially required for the operation (e.g. raw-data collection), and
     may be considered for provider internal use. 
 
+    **Request ID**:</br>
+    Clients may provide a unique request identifier (X-Request-ID) with each request. 
+    Given such a request identifier, providers must 
+    - echo the exact same X-Request-ID value in the response header.
+    - log the X-Request-ID in all operational logs related to that request.
+
     **Log-Entries**
     Whenever a _Postcondition_ mandates a log-entry, this entry shall contain
     data as defined in A_24887*.
@@ -53,10 +59,16 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.2.3
+  version: 1.4.0
 
   # version history:
   # ----------------
+  # version 1.4.0
+  #   - added status- and error code for state MAINTENANCE
+  # version 1.3.1
+  #   - clarification about condition for 404 noHealthRecord and 409 statusMismatch
+  # version 1.3.0
+  #   - optional X-Request-ID in all requests and responses
   # version 1.2.3
   #   - additional error condition for missing device registration 
   # version 1.2.2
@@ -152,6 +164,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/insurantid'
       - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
     get:
       tags:
         - ConstraintManagement
@@ -174,8 +187,8 @@ paths:
         | Device registration does not exist | 403 | unregisteredDevice ||
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
-        | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
-        | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
+        | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
 
          </br>
@@ -186,6 +199,9 @@ paths:
       responses:
         '200':
           description: Ok. Returns a list of policy assignments
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
           content:
             application/json:
               schema:
@@ -249,9 +265,9 @@ paths:
         | Device registration does not exist | 403 | unregisteredDevice ||
         | The addressed category is "emp"| 403 | invalidResource ||
         | The addressed document is part of category "emp"| 403 | invalidResource ||
-        | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
         | Addressed _document_ or _folder_ does not exist | 404 | noResource ||
-        | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
+        | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
         | An addressed _folder_ is not of type _dynamic_ | 409 | requestMismatch ||
         | An addressed _document_ is part of a restricted category or folder | 409 | requestMismatch ||
         | An addressed _category_ is not part of the XDS Document Service | 409 | requestMismatch ||
@@ -282,6 +298,9 @@ paths:
       responses:
         '201':
           description: Created
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
           content:
             application/json:
               schema:
@@ -310,6 +329,7 @@ paths:
       - $ref: '#/components/parameters/insurantid'
       - $ref: '#/components/parameters/assignmentId'
       - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
     delete:
       tags:
         - ConstraintManagement
@@ -331,9 +351,9 @@ paths:
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Device registration does not exist | 403 | unregisteredDevice ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
-        | Health record does not exist | 404 | noHealthRecord | _insurantid_ unknown |
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
         | Assignment (_assignmentid_) does not exist | 404 | noResource ||
-        | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
+        | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
 
          </br>
@@ -357,9 +377,17 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 components:
+  headers:
+    requestid:
+      description: Request identifier as provided by the client.
+      schema:
+       $ref: '#/components/schemas/RequestIdType'
   responses:
     Error400BadRequest:
       description: Bad Request.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
       content:
         application/json:
           example:
@@ -368,6 +396,9 @@ components:
             $ref: '#/components/schemas/ErrorType'
     Error403Forbidden:
       description: Forbidden.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
       content:
         application/json:
           example:
@@ -376,6 +407,9 @@ components:
             $ref: '#/components/schemas/ErrorType'
     Error404NotFound:
       description: Not found.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
       content:
         application/json:
           example:
@@ -384,6 +418,9 @@ components:
             $ref: '#/components/schemas/ErrorType'
     Error409Conflict:
       description: Conflict.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
       content:
         application/json:
           examples:
@@ -397,6 +434,9 @@ components:
             $ref: '#/components/schemas/ErrorType'
     Error500InternalError:
       description: Internal Server Error
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
       content:
         application/json:
           example:
@@ -419,6 +459,12 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/UserAgentType'
+    requestid:
+      name: X-Request-ID
+      in: header
+      description: request identifier
+      schema:
+        $ref: '#/components/schemas/RequestIdType'
     assignmentId:
       name: assignmentId
       in: path
@@ -535,6 +581,11 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9\-]{1,20}\/[a-zA-Z0-9\-\.]{1,15}$'
       example: CLIENTID1234567890AB/2.1.12-45
+    RequestIdType:
+      type: string
+      format: uuid
+      description: "Unique identifier of the request"
+      example: "f4411e89-2eca-405c-88a1-7ee20b9b6e3c"
     InsurantIdType:
       type: string
       description: |-
