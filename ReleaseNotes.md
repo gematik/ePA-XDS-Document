@@ -3,6 +3,10 @@
 # Release Notes ePA XDS Document
 ## information
 This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.3
+### changes
+  - constraints of category "technical" or of documents of category "technical" will be rejected
+  - set ig_eab.json to 'inactive'
 ## Release 3.1.3 RC
 ### changes
 - removed concept (now integrated in concept in epa-basic)

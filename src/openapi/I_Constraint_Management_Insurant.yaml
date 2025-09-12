@@ -59,10 +59,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.4.0
+  version: 1.5.0
 
   # version history:
   # ----------------
+  # version 1.5.0
+  #   - constraints of category "technical" or of documents of category "technical" will be rejected
   # version 1.4.0
   #   - added status- and error code for state MAINTENANCE
   # version 1.3.1
@@ -241,6 +243,7 @@ paths:
         folders are assigned via _category_ only).</br> 
         A client shall not set assignments _document_ for a restricted category/folder.
         A client shall set assignments for content of the XDS document service only.
+        A client shall not set assignments _document_ for category/folder "technical".
 
         **Provider**:</br>
         A new assignment shall use:</br>
@@ -250,7 +253,8 @@ paths:
         used in documentEntry.referenceIdList of the document.
 
         The category "emp" shall not be hidden, neither shall single documents of this category be hidden.
-        Assignment requests for this category or documents of this category shall be rejected.
+        The category "technical" shall not be hidden, neither shall single documents of this category be hidden.
+        Assignment requests for these categories or documents of such category shall be rejected.
 
         Each new valid assigment shall be extended by a uuid (assignmentId) for identification
         by the server. This uuid shall be unique in context of deny policies for the health record.
@@ -263,8 +267,8 @@ paths:
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Device registration does not exist | 403 | unregisteredDevice ||
-        | The addressed category is "emp"| 403 | invalidResource ||
-        | The addressed document is part of category "emp"| 403 | invalidResource ||
+        | The addressed category is "emp" or "technical"| 403 | invalidResource ||
+        | The addressed document is part of category "emp" or "technical"| 403 | invalidResource ||
         | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
         | Addressed _document_ or _folder_ does not exist | 404 | noResource ||
         | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
