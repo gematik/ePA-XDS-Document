@@ -11,12 +11,14 @@ IGs können auch für mehrere Patchversionen eines strukturierten Dokuments defi
 
 
 ## Gültigkeitszeitraum
-Jede IG enthält ein 'validFrom' Datum. Ab diesem Zeitpunkt ist das Einstellen von strukturierten Dokumenten der referenzierten Version mit den vorgebenen Metadaten möglich. Ist der Zeitpunkt noch nicht erreicht, lehnt das ePA-Aktensystem das Einstellen des Dokuments ab.
+Jede IG enthält ein 'validFrom' Datum. Ab diesem Zeitpunkt ist das Einstellen von strukturierten Dokumenten der referenzierten Version mit den vorgegebenen Metadaten möglich. Ist der Zeitpunkt noch nicht erreicht, lehnt das ePA-Aktensystem das Einstellen des Dokuments ab.
 
 Jede IG kann ein 'clientReadOnlyFrom' Datum enthalten. Dieses Datum wird dann gesetzt, wenn keine weiteren Dokumente dieser Ausprägung in die ePA eingestellt werden sollen. In der Regel ist dieses der Fall, wenn bereits neue Versionen des strukturierten Dokuments (inklusive einer neuen IG) verfügbar sind. Zuvor eingestellte Dokumente sind weiterhin verfügbar und können gelesen werden, neue Dokumente dieser Ausprägung werden vom ePA-Aktensystem jedoch abgelehnt.
 
 ## Korrekturen der Metadaten
-Im Einzefall kann es vorkommen, dass einzelne Metadatenvorgaben in einer IG geändert, bzw. korrigiert, werden müssen. Der geänderte Code wird dann zusätzlich mit in die IG aufgenommen und der zu ersetzende mit einem 'deprecatedFrom' Datum versehen. Der 'deprecated' Code soll ab diesem Datum nicht mehr verwendet werden, Dokumente mit diesem Code werden durch das ePA-Aktensystem aber nicht abgelehnt.
+Im Einzelfall kann es vorkommen, dass einzelne Metadatenvorgaben in einem IG geändert, bzw. korrigiert, werden müssen. Der geänderte Code wird dann zusätzlich mit in die IG aufgenommen und der zu ersetzende mit einem 'deprecatedFrom' Datum versehen. Der 'deprecated' Code soll ab diesem Datum nicht mehr verwendet werden, Dokumente mit diesem Code werden durch das ePA-Aktensystem aber nicht abgelehnt.
+
+Einen Schritt weiter geht die Markierung "inactiveFrom": Wird ein derartig im IG markierter Code in den Metadaten eines Dokuments, das diesem IG unterliegt, genutzt (bspw. beim Einstellen), wird das Dokument vom Aktensystem abgelehnt. Altdokumente, die diesen Code in den Metadaten führen, können aber weiterhin gelesen werden, sofern sie zeitlich vor der Inaktivierung des Codes in das Aktensystem hochgeladen wurden.
 
 ## Interne Version einer IG
 Bei Änderungen der IG - editorische Anpassungen, geänderte Verweise, Änderung des Gültigkeitszeitraums oder Korrekturen von Metadaten - wird zur Unterscheidung der einzelnen IG Varianten, der Dateiname ändert sich ja nicht, eine interne Versionsnummer mitgeführt ('igVersion')

@@ -46,7 +46,12 @@
 									"type": "string"
 								},
 								"deprecatedFrom": {
-									"description": "The following value is deprecated and should not be used from this date on. Useage of alternative value with same name instead is recommended",
+									"description": "The following value is deprecated and should not be used from this date on. Usage of alternative value with same name instead is recommended",
+									"type": "string",
+									"format": "date"
+								},
+								"inactiveFrom": {
+									"description": "The following value is inactive, should not be used and will be rejected from this date on. Usage of alternative value with same name instead is recommended",
 									"type": "string",
 									"format": "date"
 								},
@@ -78,6 +83,11 @@
 									},
 									"deprecatedFrom": {
 										"description": "The following value is deprecated and should not be used from this date on. Usage of alternative value with same name instead is recommended.",
+										"type": "string",
+										"format": "date"
+									},
+									"inactiveFrom": {
+										"description": "The following value is inactive, should not be used and will be rejected from this date on. Usage of alternative value with same name instead is recommended.",
 										"type": "string",
 										"format": "date"
 									},
