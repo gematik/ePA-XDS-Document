@@ -1,7 +1,7 @@
 {
 	"name": "Child Medical Records",
 	"description": "Child medical records defined as a medical information object (MIO) by KBV. It may include participation card and parental notes.",
-	"igVersion": "3.0.0",
+	"igVersion": "3.0.1",
 	"guidelineDefinition": {
 		"url": "https://mio.kbv.de/display/UH1X0/U-Heft",
 		"version": "1.1.0"
@@ -12,6 +12,7 @@
 		"unique": true
 	},
 	"validFromDate": "2021-05-05",
+	"clientReadOnlyFromDate": "2026-04-01",
 	"type": "mixed",
 	"metadata": {
 		"name": "folder.codeList",

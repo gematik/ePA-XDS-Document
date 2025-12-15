@@ -1,7 +1,7 @@
 {
 	"name": "Maternity Records",
 	"description": "Maternity Records defined as a medical information object (MIO) by KBV.",
-	"igVersion": "3.0.0",
+	"igVersion": "3.0.1",
 	"guidelineDefinition": {
 		"url": "https://mio.kbv.de/display/MP1X0",
 		"version": "1.0.0"
@@ -12,6 +12,7 @@
 		"unique": false
 	},
 	"validFromDate": "2021-05-05",
+	"clientReadOnlyFromDate": "2026-04-01",
 	"type": "uniform",
 	"metadata": {
 		"name": "folder.codeList",

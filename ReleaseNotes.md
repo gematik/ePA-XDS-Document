@@ -1,8 +1,12 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
-## information
-This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.3-1
+### changes
+- new Version of eAU V1.2; eAU V1.1.1 read only for clients (C_12574)
+- ig-childsrecord.json and ig-mothersrecord.json are deprecated and can only be read by clients (C_12583)
+- eAB read only for clients (C_12559)
+- renamed state MAINTENANCE to INACCESSIBLE in I_Constraint_Management_Insurant.yaml (C_12469)
 ## Release 3.1.3
 ### changes
   - constraints of category "technical" or of documents of category "technical" will be rejected
@@ -17,6 +21,8 @@ This version 3.1.2 is the logically subsequent version of version 3.0.5 and inco
 - Clarification about health record states and associates conditions and error codes in 
 ## Release 3.1.2
 release ePA-3.1.2
+## information
+This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
 ### changes
 - fix mimetypes for images in ig-medical-images.json
 - added X-Request-ID as required HTTP header parameter
