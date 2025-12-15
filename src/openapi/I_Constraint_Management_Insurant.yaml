@@ -59,10 +59,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.5.0
+  version: 1.5.1
 
   # version history:
   # ----------------
+  # version 1.5.1
+  #   - renamed all occurrences of state MAINTENANCE to INACCESSIBLE
   # version 1.5.0
   #   - constraints of category "technical" or of documents of category "technical" will be rejected
   # version 1.4.0
@@ -190,7 +192,7 @@ paths:
         | Requestor has no valid entitlement | 403 | notEntitled ||
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
-        | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
 
          </br>
@@ -271,7 +273,7 @@ paths:
         | The addressed document is part of category "emp" or "technical"| 403 | invalidResource ||
         | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
         | Addressed _document_ or _folder_ does not exist | 404 | noResource ||
-        | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
         | An addressed _folder_ is not of type _dynamic_ | 409 | requestMismatch ||
         | An addressed _document_ is part of a restricted category or folder | 409 | requestMismatch ||
         | An addressed _category_ is not part of the XDS Document Service | 409 | requestMismatch ||
@@ -357,7 +359,7 @@ paths:
         | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
         | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
         | Assignment (_assignmentid_) does not exist | 404 | noResource ||
-        | Health record is in state SUSPENDED or MAINTENANCE| 409 | statusMismatch | (see 'Retry interval') |
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
 
          </br>
