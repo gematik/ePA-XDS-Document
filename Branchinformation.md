@@ -5,10 +5,10 @@
 |This branch||
 |:----|----|
 | Context| __ePA 3.0 (ePA für alle)__|
-| Designation  | __Release 3.0.5__  |
+| Designation  | __Release 3.0.5-2x__  |
 | Current status | __released__ |
-| Release date   | __2025-02-28__  |
-| Release documents</br> (specification and relevant sources) | [gemSpecPages ePA 3.0.5](https://gemspec.gematik.de/releases/ePA_3_0_5/)|
+| Release date   | __2025-05-09__  |
+| Release documents</br> (specification and relevant sources) | [gemSpecPages ePA 3.0.5-2](https://gemspec.gematik.de/releases/ePA_3_0_5-2/)|
 | Previous release documents | [gemSpecPages ePA 3.0.3](https://gemspec.gematik.de/releases/ePA_3_0_3/)|
 | Follow-up | not yet defined |
 
