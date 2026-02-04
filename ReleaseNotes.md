@@ -3,6 +3,9 @@
 # Release Notes ePA XDS Document
 ## information
 This version 3.0.5 is the logically subsequent version of version 3.0.3 and incorporates the latest fixes, maintenance changes and changes published with version 3.1.0. 
+## Release 3.0.5-8
+### changes
+- modified ig-eab.json for sake of productive read-only restriction (merged clientReadOnlyFromDate from Release 3.1.3)
 ## Release 3.0.5-7
 ### changes
 - added new ig-eau_V_1_2.json and modified ig-eau_V_1_1-1.json for sake of productive use of eAU 1.2.0 / 1.2.1 (merged from Release 3.1.3)
