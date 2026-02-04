@@ -1,7 +1,7 @@
 {
 	"name": "Discharge Letter",
 	"description": "Discharge Letter defined by KBV acc. to § 383 SGB V",
-	"igVersion": "3.0.1",
+	"igVersion": "3.0.1-1",
 	"guidelineDefinition": {
 		"url": "https://www.kbv.de/media/sp/RL-eArztbrief.pdf"
 	},
@@ -11,6 +11,7 @@
 		"unique": true
 	},
 	"validFromDate": "2021-06-15",
+	"clientReadOnlyFromDate": "2026-04-01",
 	"metadata": {
 		"name": "folder.codeList",
 		"value": {
@@ -74,7 +75,7 @@
 						"codeSystem": "1.2.276.0.76.5.552",
 						"displayName": "eArztbrief"
 					}
-				},				
+				},
 				{
 					"name": "documentEntry.mimeType",
 					"value": [
