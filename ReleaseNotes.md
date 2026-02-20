@@ -1,6 +1,11 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
+## Release 3.1.3-2-alpha1
+- change clientReadOnlyFromDate of ig-emp.json from 1.3.26 to 1.7.26 (C_12656)
+- remove guidelinedefinition version element and set url to latest simplifier kbv eau version in ig-eau_V_1_2.json (C_12600)
+### changes
+- new Version of implementation guide for eAU V1.2 (ig-eau_V_1_2.json)); eAU V1.1.1 (ig-eau_V_1_1-1.json) read only for clients (C_12574)
 ## Release 3.1.3-1
 ### changes
 - new Version of eAU V1.2; eAU V1.1.1 read only for clients (C_12574)
