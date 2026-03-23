@@ -1,7 +1,10 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
-## Release 3.1.3-2-alpha1
+## Release 3.1.3-2
+- added missing X-Request-ID in some reponses (from C_12536)
+- added batch operation for constraints in I_Constraint_Management_Insurant.yaml (C_12623)
+## Release 3.1.3-alpha1
 - change clientReadOnlyFromDate of ig-emp.json from 1.3.26 to 1.7.26 (C_12656)
 - remove guidelinedefinition version element and set url to latest simplifier kbv eau version in ig-eau_V_1_2.json (C_12600)
 ### changes
