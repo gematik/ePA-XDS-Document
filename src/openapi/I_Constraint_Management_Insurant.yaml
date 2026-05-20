@@ -60,10 +60,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.6.0
+  version: 1.6.1
 
   # version history:
   # ----------------
+  # version 1.6.1
+  #   - fixed missing paramters in batch operation batchSetDenyPolicyAssignment
   # version 1.6.0
   #   - enable batch operations for assignments
   #   - some editorial corrections
@@ -396,6 +398,10 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
   
   /epa/xds-document/api/v1/constraints/batch-set:
+    parameters:
+      - $ref: '#/components/parameters/insurantid'
+      - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
     post:
       tags:
         - ConstraintManagement
