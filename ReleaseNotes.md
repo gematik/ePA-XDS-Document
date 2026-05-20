@@ -1,6 +1,9 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
+## Release 3.1.3-3
+- fixed missing parameters for batchSetDenyPolicyAssignment in I_Constraint_Management_Insurant.yaml (C_12759)
+- postponed clientReadOnlyFromDate to end of year 2026 in ig-emp.json (C_12783)
 ## Release 3.1.3-2
 - added missing X-Request-ID in some reponses (from C_12536)
 - added batch operation for constraints in I_Constraint_Management_Insurant.yaml (C_12623)
