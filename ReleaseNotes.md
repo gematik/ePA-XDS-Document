@@ -1,6 +1,8 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
+## Fix 3.1.3-3-2
+- change postponed clientReadOnlyFromDate to earlier date 2026-10-31 in ig-emp.json (C_12783)
 ## Release 3.1.3-3
 - fixed missing parameters for batchSetDenyPolicyAssignment in I_Constraint_Management_Insurant.yaml (C_12759)
 - postponed clientReadOnlyFromDate to end of year 2026 in ig-emp.json (C_12783)
