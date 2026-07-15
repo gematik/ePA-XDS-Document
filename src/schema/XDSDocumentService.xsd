@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Version History
-           
-            version: V1.1 (for ePA fuer alle R3.1)
-            ===========
-            *** headerContent with AccessCode and healthProfessionalInformation used by NCPeH only for feature EU-Access
-           
-            version: V1.0 (ePA fuer alle R3.0)
-            ===========
-            *** initial Version
+====================
+version V1.2
+	- removed version requirement form healthcareFacilityType and healthProfessionalRole
+	- editorial adjustment
+
+version V1.1 (for ePA fuer alle R3.1)
+	- headerContent with AccessCode and healthProfessionalInformation used by NCPeH only for feature EU-Access
+          
+version V1.0 (ePA fuer alle R3.0)
+	- initial Version
  
-     End of Version History-->
+End of Version History-->
 <xs:schema xmlns:euAccess="http://ws.gematik.de/epa-xds-document/I_Document_Management/v1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws.gematik.de/epa-xds-document/I_Document_Management/v1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.0">
 	<xs:annotation>
 		<xs:documentation xml:lang="de">
@@ -56,7 +58,7 @@
 			<xs:element name="healthProfessionalRole">
 				<xs:annotation>
 					<xs:documentation>
-						Role of the health professional. NCPeH sets in this element the display name of the role only. Role and display Name MUST be taken from https://gematik.de/fhir/terminology/ValueSet/epa-structural-role-of-healthcare-professional-vs|1.0.5
+						Role of the health professional. Codesystem and code shall be set according to https://gematik.de/fhir/terminology/ValueSet/epa-structural-role-of-healthcare-professional-vs
 					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
@@ -64,7 +66,7 @@
 						<xs:element name="system" type="xs:string">
 							<xs:annotation>
 								<xs:documentation>
-									IHE code system
+									code system
 								</xs:documentation>
 							</xs:annotation>
 						</xs:element>
@@ -81,7 +83,7 @@
 			<xs:element name="healthcareFacilityType">
 				<xs:annotation>
 					<xs:documentation>
-							Healthcare Facility Type according to value set in https://gematik.de/fhir/terminology/ValueSet/epa-ehealth-dsi-healthcare-facility-type-vs|1.0.5
+							Type of the healthcare facility. Codesystem and code shall be set according to https://gematik.de/fhir/terminology/ValueSet/epa-ehealth-dsi-healthcare-facility-type-vs
 						</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
@@ -89,14 +91,14 @@
 						<xs:element name="system" type="xs:string">
 							<xs:annotation>
 								<xs:documentation>
-									IHE code system
+									code system
 								</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="code" type="xs:string">
 							<xs:annotation>
 								<xs:documentation>
-							value of the designated code system 
+									value of the designated code system 
 								</xs:documentation>
 							</xs:annotation>
 						</xs:element>
@@ -106,7 +108,7 @@
 			<xs:element name="leiName" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>
-							Name of the hospital or medical facility where patient care takes place.
+							Human readable name of the hospital or medical facility where patient care takes place.
 						</xs:documentation>
 				</xs:annotation>
 			</xs:element>
