@@ -1,20 +1,33 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>
 
 # Release Notes ePA XDS Document
+## Release ePA-27 3.2.0-0
+ePA 27 RC
+### changes
+- XDSDocumentService.wsdl: EU parts removed and updateMetadata removed; XDSDocumentService.xsd: no longer needed
+- I_Constraint_Management_Insurant.yaml: clarification of folder concept and collection concept (C_12842) 
+- adopt constraint management to the needs of MHD:
+    - I_Constraint_Management_Insurant is deprecated
+    - src/openapi/I_Constraint_Management includes the functionality of I_Constraint_Management_Insurant and supports the assignment of MHD documents.
+- removed post-condition for Audit Event logs in OpenApis (now in IG ePA Basisfunktionalitäten only)
 ## Release 3.1.3-4
+### changes
 - removed value set version requirement in XDSDocumentService.xsd (C_12755)
 ## Fix 3.1.3-3-2
+### changes
 - change postponed clientReadOnlyFromDate to earlier date 2026-10-31 in ig-emp.json (C_12783)
 ## Release 3.1.3-3
+### changes
 - fixed missing parameters for batchSetDenyPolicyAssignment in I_Constraint_Management_Insurant.yaml (C_12759)
 - postponed clientReadOnlyFromDate to end of year 2026 in ig-emp.json (C_12783)
 ## Release 3.1.3-2
+### changes
 - added missing X-Request-ID in some reponses (from C_12536)
 - added batch operation for constraints in I_Constraint_Management_Insurant.yaml (C_12623)
 ## Release 3.1.3-alpha1
+### changes
 - change clientReadOnlyFromDate of ig-emp.json from 1.3.26 to 1.7.26 (C_12656)
 - remove guidelinedefinition version element and set url to latest simplifier kbv eau version in ig-eau_V_1_2.json (C_12600)
-### changes
 - new Version of implementation guide for eAU V1.2 (ig-eau_V_1_2.json)); eAU V1.1.1 (ig-eau_V_1_1-1.json) read only for clients (C_12574)
 ## Release 3.1.3-1
 ### changes
