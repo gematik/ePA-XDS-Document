@@ -2,6 +2,8 @@ openapi: 3.0.1
 info:
   title: I_Constraint_Management_Insurant
   description: |
+    **The interface I_Constraint_Management_Insurant is deprated and will be replaced by I_Constraint_Management.**
+    
     This interface provides access to the service **Constraint Management** of a personal health 
     record for insurants and representatives.<br/>
     
@@ -44,12 +46,8 @@ info:
     - log the X-Request-ID in all operational logs related to that request.
 
     **Log-Entries**
-    Whenever a _Postcondition_ mandates a log-entry, this entry shall contain
-    data as defined in IG-EPA27775LWU*.
-    Log entry storage requires an entitled user for the related operation to 
-    ensure access to secure data storage. Therefore, log entry creation shall 
-    always be skipped and no log entry shall be stored if this precondition is 
-    not met.
+    Log entries for the audit Event Service shall be created according to
+    "Implementation Guide ePA BAsisfunktionalitäten - Audit Event Service - Belegung der Protokolldaten"
 
   contact:
     name: gematik GmbH
@@ -60,10 +58,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.6.1
+  version: 1.6.2
 
   # version history:
   # ----------------
+  # version 1.6.2
+  #   - reworked logging requirement
   # version 1.6.1
   #   - fixed missing paramters in batch operation batchSetDenyPolicyAssignment
   # version 1.6.0
@@ -143,20 +143,9 @@ tags:
       - oid_praxis-podologe
       - oid_praxis-ernaehrungstherapeut
 
-      **Restricted categories and folders**:</br>
-      Some categories/folders of a health record may contain MIOs or structured documents represented by more 
-      than one XDS document (document collections, e.g. category _vaccination_). Hiding single documents 
-      of such MIOs or structured documents would take the contained information out of context. This should 
-      be avoided, thus hiding single documents is not supported in this case.</br>
-      The following list shows categories with this restriction and is for information only and 
-      may be incomplete. The normative requirement to avoid hiding of single documents applies
-      for any folder with type = "uniform" or "mixed" (see 
-      src/implementation_guides on GitHub/gematik/api-epa).
-      
-      - dental
-      - child
-      - pregnancy_childbirth
-      - vaccination
+      **Restriction for document collections of type mixed or uniform**:</br>Hiding single documents
+      of a document collection would take the contained information out of context. This should be avoided, 
+      thus hiding single documents of document collections is not supported in this case.</br>
 
       **Exceptions**
       The category "emp" can not be hidden by assignments of the general deny policy. 
@@ -251,7 +240,7 @@ paths:
         A client shall set assignments for existing resources only.</br>
         A client shall set assignments _folder_ for dynamic folders only (static 
         folders are assigned via _category_ only).</br> 
-        A client shall not set assignments _document_ for a restricted category/folder.
+        A client shall not set assignments _document_ for a document collection.
         A client shall set assignments for content of the XDS document service only.
         A client shall not set assignments _document_ for static folder "technical".
 
@@ -283,7 +272,7 @@ paths:
         | The addressed _document_ or _folder_ does not exist | 404 | noResource ||
         | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
         | The addressed _folder_ is not of type _dynamic_ | 409 | requestMismatch ||
-        | The addressed _document_ is part of a restricted category or folder | 409 | requestMismatch ||
+        | The addressed _document_ is part of a document collection | 409 | requestMismatch ||
         | The addressed _category_ is not part of the XDS Document Service | 409 | requestMismatch ||
         | The assignment does yet exist | 409 | requestMismatch | avoid duplicates ||
         | Any other error | 500 | internalError | (see 'Retry interval') |
@@ -292,7 +281,6 @@ paths:
         | Postconditions                        | Remarks |
         |---------------------------------------|---------|
         | The policy assignment is extended with the assignmentId and stored in SecureDataStorage ||
-        | A log-entry for the operation exists | all operation results |
         | The raw-data of the operation is collected and associated to _useragent_ | for any operation result according to gemSpec_PerfUC_B4.x |
 
       requestBody:
@@ -378,7 +366,6 @@ paths:
         | Postconditions                        | Remarks |
         |---------------------------------------|---------|
         | The addressed assignment is removed from the general deny policy ||
-        | A log-entry for the operation exists | all operation results |
 
       responses:
         '204':
@@ -415,7 +402,7 @@ paths:
         A client shall set assignments for existing resources only.</br>
         A client shall set assignments _folder_ for dynamic folders only (static 
         folders are assigned via _category_ only).</br> 
-        A client shall not set assignments _document_ for a restricted category/folder.
+        A client shall not set assignments _document_ for a document collection.
         A client shall set assignments for content of the XDS document service only.
         A client shall not set assignments _document_ for staticfolder "technical".
 
@@ -465,13 +452,12 @@ paths:
         | An addressed _document_ is part of category "emp" or "technical"| invalidResource ||
         | An addressed _document_, _category_ or _folder_ does not exist | noResource | for _category_: any category not enumerated |
         | An addressed _folder_ is not of type _dynamic_ | requestMismatch ||
-        | An addressed _document_ is part of a restricted category or folder | requestMismatch ||
+        | An addressed _document_ is part of a document collection | requestMismatch ||
 
          </br>
         | Postconditions                        | Remarks |
         |---------------------------------------|---------|
         | The policy assignments are extended with an assignmentId and stored in SecureDataStorage ||
-        | A log-entry for the operation exists | all operation results |
         | The raw-data of the operation is collected and associated to _useragent_ | for any operation result according to gemSpec_Perf UC_B4.x |
 
       requestBody:
@@ -604,7 +590,6 @@ paths:
         | Postconditions                        | Remarks |
         |---------------------------------------|---------|
         | The addressed assignments are removed from the general deny policy | successful operation only |
-        | A log-entry for the operation exists | all operation results |
 
       requestBody:
         required: true

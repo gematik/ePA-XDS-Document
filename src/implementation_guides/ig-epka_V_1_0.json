@@ -12,6 +12,7 @@
 		"unique": true
 	},
 	"validFromDate": "2025-07-15",
+	"clientReadOnlyFromDate": "2027-10-20",
 	"metadata": {
 		"name": "folder.codeList",
 		"value": {

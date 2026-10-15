@@ -1,0 +1,1117 @@
+openapi: 3.0.1
+info:
+  title: I_Constraint_Management
+  description: |
+    This interface provides access to the service **Constraint Management** of a personal health 
+    record for insurants and representatives.<br/>
+    
+    **General conditions**:</br> 
+    For all operations if applicable:
+    - a section _Client_ in operation descriptions covers recommendations (informative) for clients.
+    - a section _Provider_ in operation descriptions covers requirements for the server side. 
+    - error responses may be extended by helpful information about the error condition in _errorDetail_
+
+    **Prerequisites**:</br>
+    The Health Record System shall provide 
+    - name
+    - role ((profession-)oid)
+    - identifier (telematik-id or kvnr)
+    - indication of a valid entitlement
+    - device registration status
+        
+    of the current user (requestor) for evaluation in operations.
+
+    Operations mandating a valid entitlement implicitly mandate use of a VAU-channel
+    and a valid ID-Token. If one of these conditions is not met, then the response
+    of the (aborted) operation shall always be '403': 'notEntitled'. 
+
+    **Retry interval**:</br>
+    The following retry intervals are suggested in case of an error response:<br>
+    - '409' Conflict (statusMismatch).
+      - approx. 24 hours
+    - '500' Internal Error
+      - approx. 10 minutes
+
+    **User Agent**:</br>
+    The user agent information (x-useragent) is part of any request, even if 
+    not essentially required for the operation (e.g. raw-data collection), and
+    may be considered for provider internal use. 
+
+    **Request ID**:</br>
+    Clients may provide a unique request identifier (X-Request-ID) with each request. 
+    Given such a request identifier, providers must 
+    - echo the exact same X-Request-ID value in the response header.
+    - log the X-Request-ID in all operational logs related to that request.
+
+    **Log-Entries**
+    Log entries for the audit Event Service shall be created according to
+    "Implementation Guide ePA BAsisfunktionalitäten - Audit Event Service - Belegung der Protokolldaten"
+
+  contact:
+    name: gematik GmbH
+    email: epa@gematik.de
+    url: 'http://www.gematik.de'
+
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+
+  version: 2.0.0
+
+  # version history:
+  # ----------------
+  # version 2.0.0
+  #   - renamed to I_Constraint_Management (was I_Constraint_Management_Insurant)
+  #   - added support for MHD documents and lists
+  #   - reworked logging requirement
+  # version 1.6.1
+  #   - fixed missing paramters in batch operation batchSetDenyPolicyAssignment
+  # version 1.6.0
+  #   - enable batch operations for assignments
+  #   - some editorial corrections
+  #   - added missing X-Request-ID to all responses
+  # version 1.5.1
+  #   - renamed all occurrences of state MAINTENANCE to INACCESSIBLE
+  # version 1.5.0
+  #   - constraints of category "technical" or of documents of category "technical" will be rejected
+  # version 1.4.0
+  #   - added status- and error code for state MAINTENANCE
+  # version 1.3.1
+  #   - clarification about condition for 404 noHealthRecord and 409 statusMismatch
+  # version 1.3.0
+  #   - optional X-Request-ID in all requests and responses
+  # version 1.2.3
+  #   - additional error condition for missing device registration 
+  # version 1.2.2
+  #   - clarification regarding required entitlement for logging
+  #   - added error condition for not authenticated user sessions
+  # version 1.2.1
+  #   - editorial correction of rootDocumentId explanation and format
+  # version 1.2.0
+  #   - removed paging from getDenyPolicyAssignments
+  #   - updated list of relevant oids (editorial)
+  # version 1.1.4
+  #   - added childsrecord category
+  # version 1.1.3
+  #   - bugfix UserAgentType
+  # version 1.1.2
+  #   - changed http-statuscode in description of operation setDenyPolicyAssignment to 201
+  # version 1.1.1
+  #   - bugfix: removed additionalProperties from schemas
+  #   - added category 'transcripts' and 'diga' to category enum
+  # version 1.1.0
+  #   - removed user-specific deny policy
+  #   - corrections for categoryId in enum and description
+  #   - corrections in examples
+  # version 1.0.0
+  #   - first release version
+  # version 0.0.1
+  #   - initial version for review
+
+servers:
+  - url: https://epa-hst1.prod.epa4all.de
+
+tags:
+  - name: ConstraintManagement
+    description: |
+      Constraint Management allow to configure the general deny policiy of a health record by 
+      setting or deleting constraints (assignments of the deny policy).</br>
+      An assignment may be related to a single document, a folder or a category. Any document affected
+      by an assigment will be hidden to any user of the deny policy affected user roles.</br>
+      
+      The assignments of the deny policies hide documents of the health record. Assignments 
+      related to folders or categories hide all contained documents (not the folder / category)
+
+      **Allowed user groups/ roles**:</br> 
+      The general deny policy affects the following user groups (roles) for each assignment.
+      The following list of oids is for information only and may be incomplete, the normative 
+      requirement is defined in A_24306-*
+      - oid_praxis_arzt
+      - oid_krankenhaus
+      - oid_institution-vorsorge-reha
+      - oid_zahnarztpraxis
+      - oid_öffentliche_apotheke
+      - oid_praxis_psychotherapeut
+      - oid_institution-pflege
+      - oid_institution-geburtshilfe
+      - oid_praxis-physiotherapeut
+      - oid_institution-oegd
+      - oid_institution-arbeitsmedizin
+      - oid_diga
+      - oid_praxis-ergotherapeut
+      - oid_praxis-logopaede
+      - oid_praxis-podologe
+      - oid_praxis-ernaehrungstherapeut
+
+      **Restriction for document collections of type mixed or uniform**:</br>Hiding single documents
+      of a document collection would take the contained information out of context. This should be avoided, 
+      thus hiding single documents of document collections is not supported in this case.</br>
+
+      **Exceptions**
+      The category "emp" can not be hidden by assignments of the general deny policy. 
+      The participation in the electronic medical process is managed by consent decisions only. 
+      This applies also for single documents of this category.
+      
+      **Remarks**:</br>
+      - Assignments of the policies are deleted internally in case a referenced _document_
+      or folder is deleted from the document management.
+
+paths:
+  /epa/document/api/v1/constraints:
+    parameters:
+      - $ref: '#/components/parameters/insurantid'
+      - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
+    get:
+      tags:
+        - ConstraintManagement
+      operationId: getDenyPolicyAssignments
+      summary: (getDenyPolicyAssignments) get a list of actual set deny policy assignments
+      description: |
+        Get a list of actual set assignments of the general deny policy.</br>  
+        This operation is limited to entitled users of role oid_versicherter.
+        
+        **Client**:</br>
+        no recommendations.
+
+        **Provider**:</br>
+        The returned list shall contain a list of all actual set assignments of the general deny policy.</br>
+
+        | Conditions | Status code | Error code | Remarks |
+        |------------|-------------|------------|---------|
+        | Successful operation | 200 |||
+        | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
+        | Device registration does not exist | 403 | unregisteredDevice ||
+        | Requestor has no valid entitlement | 403 | notEntitled ||
+        | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
+        | Any other error | 500 | internalError | (see 'Retry interval') |
+
+         </br>
+        | Postconditions                        | Remarks |
+        |---------------------------------------|---------|
+        | none ||
+
+      responses:
+        '200':
+          description: Ok. Returns a list of policy assignments
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      allOf:
+                      - $ref: '#/components/schemas/DenyPolicyAssignmentResponseType'
+              examples:
+                getAll:
+                  $ref: '#/components/examples/Get_AllPolicyAssignments'
+        '400':
+          $ref: '#/components/responses/Error400BadRequest'
+        '403':
+          $ref: '#/components/responses/Error403Forbidden'
+        '404':
+          $ref: '#/components/responses/Error404NotFound'
+        '409':
+          $ref: '#/components/responses/Error409Conflict'
+        '500':
+          $ref: '#/components/responses/Error500InternalError'
+
+    post:
+      tags:
+        - ConstraintManagement
+      operationId: setDenyPolicyAssignment
+      summary: (setDenyPolicyAssignment) set a new deny policy assignment
+      description: |
+        Set a new assignment for the general deny policy.</br>
+        This operation is limited to entitled users of role oid_versicherter.
+
+        **Client**:</br>
+        A client shall set assignments for existing resources only.</br>
+        A client shall set assignments _folder_ for dynamic folders only (static 
+        folders are assigned via _category_ only).</br> 
+        A client shall not set assignments _document_ for a document collection.
+        A client shall not set assignments _document_ for static folder "technical".
+
+        **Provider**:</br>
+        A new assignment shall use:</br>
+        - a _category_ entry addressed by a technical identifier string (e.g. 'vaccination')
+        - a _folder_ entry addressed
+          - in XDS service by _Folder.entryUUID_ (urn-encoded uuid)
+          - in MHD service by _List.identifier:entryUUID.value_ of profile _EPA MHD Folder_ (urn-encoded uuid)
+        - a _document_ entry addressed
+          - in XDS service by an identifier 'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' as 
+        used in _DocumentEntry.referenceIdList_ of the document.
+          - in MHD service by an identifier to the document with _documentReference.status_=_'current'_ using _documentReference.masterIdentifier_.
+
+        The category "emp" shall not be hidden, neither shall single documents of this category be hidden.
+        The static folder ('category') "technical" shall not be hidden, neither shall single documents of this folder be hidden.
+        Assignment requests for these categories/folders or documents of such category/folder shall be rejected.
+
+        Each new valid assigment shall be extended by a uuid (assignmentId) for identification
+        by the server. This uuid shall be unique in context of deny policies for the health record.
+
+        | Conditions | Status code | Error code | Remarks |
+        |------------|-------------|------------|---------|
+        | Successful operation | 201 |||
+        | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
+        | Requestor has no valid entitlement | 403 | notEntitled ||
+        | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Device registration does not exist | 403 | unregisteredDevice ||
+        | The addressed _category_ is "emp" or "technical"| 403 | invalidResource ||
+        | The addressed _document_ is part of category "emp" or "technical"| 403 | invalidResource ||
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
+        | The addressed _document_ or _folder_ does not exist | 404 | noResource ||
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
+        | The addressed _folder_ is not of type _dynamic_ | 409 | requestMismatch ||
+        | The addressed _document_ is part of a document collection | 409 | requestMismatch ||
+        | The addressed _category_ is not part of the Document Service | 409 | requestMismatch ||
+        | The assignment does yet exist | 409 | requestMismatch | avoid duplicates ||
+        | Any other error | 500 | internalError | (see 'Retry interval') |
+
+         </br>
+        | Postconditions                        | Remarks |
+        |---------------------------------------|---------|
+        | The policy assignment is extended with the assignmentId and stored in SecureDataStorage ||
+        | The raw-data of the operation is collected and associated to _useragent_ | for any operation result according to gemSpec_PerfUC_B4.x |
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/DenyPolicyAssignmentType'
+            examples:
+              GDPolicyAssignmentForCategories:
+                $ref: '#/components/examples/Add_category_to_general_deny_policy'
+              GDPolicyAssignmentForDocuments:
+                $ref: '#/components/examples/Add_document_to_general_deny_policy'
+              GDPolicyAssignmentForFolders:
+                $ref: '#/components/examples/Add_folder_to_general_deny_policy'
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/DenyPolicyAssignmentResponseType'
+              examples:
+                GDPolicyAssignmentForCategories:
+                  $ref: '#/components/examples/Response_category_to_general_deny_policy'
+                GDPolicyAssignmentForDocuments:
+                  $ref: '#/components/examples/Response_document_to_general_deny_policy'
+                GDPolicyAssignmentForFolders:
+                  $ref: '#/components/examples/Response_folder_to_general_deny_policy'
+        '400':
+          $ref: '#/components/responses/Error400BadRequest'
+        '403':
+          $ref: '#/components/responses/Error403Forbidden'
+        '404':
+          $ref: '#/components/responses/Error404NotFound'
+        '409':
+          $ref: '#/components/responses/Error409Conflict'
+        '500':
+          $ref: '#/components/responses/Error500InternalError'
+
+
+
+  /epa/document/api/v1/constraints/{assignmentId}:
+    parameters:
+      - $ref: '#/components/parameters/insurantid'
+      - $ref: '#/components/parameters/assignmentId'
+      - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
+    delete:
+      tags:
+        - ConstraintManagement
+      operationId: deleteDenyPolicyAssignment
+      summary: (deleteDenyPolicyAssignment) delete a specific deny policy assignment
+      description: |
+        Delete one existing assignment of the general deny policy.</br>
+        This operation is limited to entitled users of role oid_versicherter.
+
+        **Client**:</br>
+        no recommendations.
+
+        **Provider**:</br>
+        The addressed assignment shall be removed from the general deny policy.
+
+        | Conditions | Status code | Error code | Remarks |
+        |------------|-------------|------------|---------|
+        | Successful operation | 204 |||
+        | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
+        | Requestor has no valid entitlement | 403 | notEntitled ||
+        | Device registration does not exist | 403 | unregisteredDevice ||
+        | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
+        | Assignment (_assignmentid_) does not exist | 404 | noResource ||
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
+        | Any other error | 500 | internalError | (see 'Retry interval') |
+
+         </br>
+        | Postconditions                        | Remarks |
+        |---------------------------------------|---------|
+        | The addressed assignment is removed from the general deny policy ||
+
+      responses:
+        '204':
+          description: OK. Assignment deleted
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+        '400':
+          $ref: '#/components/responses/Error400BadRequest'
+        '403':
+          $ref: '#/components/responses/Error403Forbidden'
+        '404':
+          $ref: '#/components/responses/Error404NotFound'
+        '409':
+          $ref: '#/components/responses/Error409Conflict'
+        '500':
+          $ref: '#/components/responses/Error500InternalError'
+  
+  /epa/document/api/v1/constraints/batch-set:
+    parameters:
+      - $ref: '#/components/parameters/insurantid'
+      - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
+    post:
+      tags:
+        - ConstraintManagement
+      operationId: batchSetDenyPolicyAssignment
+      summary: (batchSetDenyPolicyAssignment) set one or more new deny policy assignment
+      description: |
+        Set one or more new assignment for the general deny policy.</br>
+        This operation is limited to entitled users of role oid_versicherter.
+
+        **Client**:</br>
+        A client shall set assignments for existing resources only.</br>
+        A client shall set assignments _folder_ for dynamic folders only (static 
+        folders are assigned via _category_ only).</br> 
+        A client shall not set assignments _document_ for a document collection.
+        A client shall not set assignments _document_ for static folder "technical".
+
+        A client may set assignments for several resources in a single request, e.g. to add
+        a document and its appendencies or to add a list of categories.  
+
+        **Provider**:</br>
+        Each new assignment shall be:</br>
+        - a _category_ entry addressed by a technical identifier string (e.g. 'vaccination')
+        - a _folder_ entry addressed
+          - in XDS service by _Folder.entryUUID_ (urn-encoded uuid)
+          - in MHD service by _List.identifier:entryUUID.value_ of profile _EPA MHD Folder_ (urn-encoded uuid)
+        - a _document_ entry addressed
+          - in XDS service by an identifier 'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' as used in _DocumentEntry.referenceIdList_ of the document.
+          - in MHD service by an identifier to the document with _documentReference.status_=_'current'_ using _documentReference.masterIdentifier_.        
+        The category "emp" shall not be hidden, neither shall single documents of this category be hidden.
+        The static folder (or category) "technical" shall not be hidden, neither shall single documents of this folder be hidden.
+        Assignment requests for these categories/folders or documents of such category/folder shall be rejected.
+
+        Each new valid assigment shall be extended by a uuid (assignmentId) for identification
+        by the server. This uuid shall be unique in context of deny policies for the health record.
+
+        A request may contain several assignments of the same or of different types at a time. A successful operation 
+        result requires all contained assignments to be valid. At least one invalid assignment provided leads to abortion
+        of the operation with no assignment provided applied to the general deny policy at all. 
+
+        The operation response shall be: 
+        - status code '201' and a list of all requested assignments in case of success
+        - status code '422' and a list of the failed requested assignments including an error code (not listed 
+        but requested assignments are rated as valid but are not added to the general deny policy).
+        - a status code other than '201' or '422' and an indicating error code if the whole request is rejected in general
+  
+
+        | Conditions for http status code| Status code | Error code | Remarks |
+        |--------------------------------|-------------|------------|---------|
+        | Successful operation | 201 |||
+        | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
+        | Requestor has no valid entitlement | 403 | notEntitled ||
+        | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Device registration does not exist | 403 | unregisteredDevice ||
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
+        | Unsuccessful operation with partial errors| 422 || see _Conditions for response_ table below | 
+        | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        <br/>        | Conditions for response error code | Error code | Remarks |
+        |------------------------------------|------------|---------|
+        | An addressed _document_ is part of category "emp" or "technical"| invalidResource ||
+        | An addressed _document_, _category_ or _folder_ does not exist | noResource | for _category_: any category not enumerated |
+        | An addressed _folder_ is not of type _dynamic_ | requestMismatch ||
+        | An addressed _document_ is part of a document collection | requestMismatch ||
+
+         </br>
+        | Postconditions                        | Remarks |
+        |---------------------------------------|---------|
+        | The policy assignments are extended with an assignmentId and stored in SecureDataStorage ||
+        | The raw-data of the operation is collected and associated to _useragent_ | for any operation result according to gemSpec_Perf UC_B4.x |
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object  
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DenyPolicyAssignmentType' 
+                  minItems: 1
+                  maxItems: 25
+            examples:
+              AssignmentsOk1: 
+                $ref: '#/components/examples/Add_three_documents'
+              AssignmentsOk2: 
+                $ref: '#/components/examples/Add_two_categories_and_one_folder'
+              AssignmentsFail1: 
+                $ref: '#/components/examples/Failed_add_three_documents'
+              AssignmentsFail2: 
+                $ref: '#/components/examples/Failed_add_two_categories_with_unsupported_id_and_document_in_technical_folder'
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      allOf:
+                      - $ref: '#/components/schemas/DenyPolicyAssignmentResponseType'   
+                        minItems: 1
+              examples:
+                ResponseAssignmentsOk1: 
+                  $ref: '#/components/examples/Response_add_three_documents'
+                ResponseAssignmentsOk2: 
+                  $ref: '#/components/examples/Response_add_two_categories_and_one_folder'
+        '400':
+          $ref: '#/components/responses/Error400BadRequest'
+        '403':
+          $ref: '#/components/responses/Error403Forbidden'
+        '404':
+          $ref: '#/components/responses/Error404NotFound'
+        '409':
+          $ref: '#/components/responses/Error409Conflict'
+        '422':
+          description: Unprocessable Entity with error details about the failed requested assignments
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          allOf:
+                          - $ref: '#/components/schemas/DenyPolicyAssignmentResponseTypeFail'     
+                        minItems: 1
+              examples:
+                ResponseAssignmentsFail1: 
+                  $ref: '#/components/examples/Failed_response_add_three_documents'
+                ResponseAssignmentsFail2: 
+                  $ref: '#/components/examples/Failed_response_add_two_categories_with_unsupported_id_and_document_in_technical_folder'
+        '500':
+          $ref: '#/components/responses/Error500InternalError'
+  
+  /epa/document/api/v1/constraints/batch-delete:
+    parameters:
+      - $ref: '#/components/parameters/insurantid'
+      - $ref: '#/components/parameters/useragent'
+      - $ref: '#/components/parameters/requestid'
+    post:
+      tags:
+        - ConstraintManagement
+      operationId: batchDeleteDenyPolicyAssignment
+      summary: (batchDeleteDenyPolicyAssignment) delete one or more deny policy assignment
+      description: |
+        Delete one or more existing assignment of the general deny policy.</br>
+        This operation is limited to entitled users of role oid_versicherter.
+
+        **Client**:</br>
+        no recommendations.
+
+        **Provider**:</br>
+        All addressed assignments shall be removed from the general deny policy.
+
+        A successful operation result requires all provided assignments to be valid (i.e. assignmentid exists). 
+        At least one invalid assignment provided leads to abortion of the operation with non of the assignments deleted. 
+
+        The operation response is: 
+        - Status code '204' if all addressed assignments are deleted
+        - Status code '422' and a list of the failed requested assignments including an error code (not listed 
+        but requested assignments are acceptable for deletion but not yet deleted)
+        - Status code other than '204' or '422' and an indicating error code if the whole request is rejected in general.       
+
+        | Conditions | Status code | Error code | Remarks |
+        |------------|-------------|------------|---------|
+        | Successful operation | 204 |||
+        | Request does not match schema | 400 | malformedRequest ||
+        | Requestor not authorized | 403 | invalAuth | no user session with valid ID-Token available |
+        | Requestor has no valid entitlement | 403 | notEntitled ||
+        | Device registration does not exist | 403 | unregisteredDevice ||
+        | Requestor role is not _oid_versicherter_ | 403 | invalidOid ||
+        | Health record does not exist (UNKNOWN) or is in state INITIALIZED | 404 | noHealthRecord | |
+        | Health record is in state SUSPENDED or INACCESSIBLE| 409 | statusMismatch | (see 'Retry interval') |
+        | Unsuccessful operation with partial errors| 422 || see _Conditions for response_ table below | 
+        | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        <br/>
+        | Conditions for response error code | Error code | Remarks |
+        |------------------------------------|------------|---------|
+        | Assignment (_assignmentid_) does not exist | noResource ||
+
+         </br>
+        | Postconditions                        | Remarks |
+        |---------------------------------------|---------|
+        | The addressed assignments are removed from the general deny policy | successful operation only |
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object  
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DenyPolicyAssignmentDeleteType' 
+                  minItems: 1
+                  maxItems: 25
+            examples:
+              DeleteOk1: 
+                $ref: '#/components/examples/Delete_three_documents'
+
+      responses:
+        '422':
+          description: Unprocessable Entity with error details about the failed requested deletions
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          allOf:
+                          - $ref: '#/components/schemas/DenyPolicyAssignmentDeleteResponseTypeFail'      
+                        minItems: 1
+              examples:
+                DeleteFail1: 
+                  $ref: '#/components/examples/Failed_response_delete_three_documents'
+
+        '204':
+          description: OK. Assignment deleted
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/requestid'
+        '400':
+          $ref: '#/components/responses/Error400BadRequest'
+        '403':
+          $ref: '#/components/responses/Error403Forbidden'
+        '404':
+          $ref: '#/components/responses/Error404NotFound'
+        '409':
+          $ref: '#/components/responses/Error409Conflict'
+        '500':
+          $ref: '#/components/responses/Error500InternalError'
+
+components:
+  headers:
+    requestid:
+      description: Request identifier as provided by the client.
+      schema:
+       $ref: '#/components/schemas/RequestIdType'
+  responses:
+    Error400BadRequest:
+      description: Bad Request.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
+      content:
+        application/json:
+          example:
+            errorCode: malformedRequest
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error403Forbidden:
+      description: Forbidden.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
+      content:
+        application/json:
+          example:
+            errorCode: notEntitled
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error404NotFound:
+      description: Not found.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
+      content:
+        application/json:
+          example:
+            errorCode: noHealthRecord
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error409Conflict:
+      description: Conflict.
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
+      content:
+        application/json:
+          examples:
+            statusMismatch:
+              value:
+                errorCode: statusMismatch
+            requestMismatch:
+              value:
+                errorCode: requestMismatch
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+    Error500InternalError:
+      description: Internal Server Error
+      headers:
+        X-Request-ID:
+          $ref: '#/components/headers/requestid'
+      content:
+        application/json:
+          example:
+            errorCode: internalError
+          schema:
+            $ref: '#/components/schemas/ErrorType'
+
+  parameters:
+    insurantid:
+      name: x-insurantid
+      in: header
+      description: Health Record Identifier.
+      required: true
+      schema:
+        $ref: '#/components/schemas/InsurantIdType'
+    useragent:
+      name: x-useragent
+      in: header
+      description: user agent information
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserAgentType'
+    requestid:
+      name: X-Request-ID
+      in: header
+      description: request identifier
+      schema:
+        $ref: '#/components/schemas/RequestIdType'
+    assignmentId:
+      name: assignmentId
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AssignmentIdType'
+  schemas:
+    AssignmentIdType:
+      description: Server-assigned unique uuid of a particular deny policy assignment
+      type: string
+      format: uuid
+      example: fa2bc929-f6c9-419f-ae75-cea040927651
+    UuidType:
+      description: An urn-encoded UUID
+      type: string
+      example: urn:uuid:4fa70820-2384-4001-80a9-7bbd5e085efb
+    RootDocumentIdType:
+      description: |
+        The rootDocumentUniqueId, a CXi style identifier with schema 'uniqueID^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId' with symbolic UUID as uniqueId
+      type: string
+      example: urn:uuid:4fa70820-2384-4001-80a9-7bbd5e085efb^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+    MasterIdentifierType:
+      description: |
+        To reference the document in MHD the DocumentReference.masterIdentifier.value is used.
+      type: string
+      example: 72a16b52-1e1c-4ded-8204-6f31a4b4e7cb
+    CategoryIdType:
+      description: A technical identifier of a category
+      type: string
+      enum:
+        - reports
+        - emergency
+        - eab
+        - dental
+        - child
+        - childsrecord
+        - pregnancy_childbirth
+        - vaccination
+        - patient
+        - receipt
+        - diga
+        - care
+        - eau
+        - rehab
+        - transcripts
+        - other
+      example: emergency
+    ErrorResponseType:
+      description: Error condition specifier
+      type: string
+    DenyPolicyAssignmentDeleteType:
+      description: Basic type for deny policy assignment deletion.
+      type: object
+      properties:
+        assignmentId:
+          allOf:
+            - $ref: '#/components/schemas/AssignmentIdType'
+          description: unique identifier of a particular deny policy assignment
+    DenyPolicyAssignmentDeleteResponseTypeFail:
+      description: Basic type for a deny policy assignment deletion error response.
+      allOf:
+        - type: object
+          properties:
+            errorCode:
+              allOf:
+                - $ref: '#/components/schemas/ErrorResponseType'
+        - type: object
+          properties:
+            assignmentId:
+              allOf:
+                - $ref: '#/components/schemas/AssignmentIdType'
+    DenyPolicyAssignmentType:
+      description: Basic type for deny policy assignments.
+      oneOf:
+        - $ref: '#/components/schemas/GDPolicyAssignmentForDocumentType'
+        - $ref: '#/components/schemas/GDPolicyAssignmentForFolderType'
+        - $ref: '#/components/schemas/GDPolicyAssignmentForCategoryType'
+    DenyPolicyAssignmentResponseType:
+      description: Basic type for a deny policy assignment response.
+      allOf:
+        - type: object
+          properties:
+            assignmentId:
+              allOf:
+                - $ref: '#/components/schemas/AssignmentIdType'
+        - $ref: '#/components/schemas/DenyPolicyAssignmentType'
+    DenyPolicyAssignmentResponseTypeFail:
+      description: Basic type for a deny policy assignment error response.
+      allOf:
+        - type: object
+          properties:
+            errorCode:
+              allOf:
+                - $ref: '#/components/schemas/ErrorResponseType'
+        - $ref: '#/components/schemas/DenyPolicyAssignmentType'
+    GDPolicyAssignmentForCategoryType:
+      description: Global deny policy assigment for a single category (static folder).
+      type: object
+      properties:
+        for:
+          type: string
+          enum:
+            - category
+        parameters:
+          type: object
+          required:
+            - categoryId
+          properties:
+            categoryId:
+              allOf:
+                - $ref: '#/components/schemas/CategoryIdType'
+              description: technical identifier of a category
+    GDPolicyAssignmentForDocumentType:
+      description: Global deny policy assigment for a single document.
+      type: object
+      properties:
+        for:
+          type: string
+          enum:
+            - document
+        parameters:
+          oneOf:
+            - type: object
+              required:
+               - rootDocumentId
+              properties:
+                rootDocumentId:
+                  allOf:
+                    - $ref: '#/components/schemas/RootDocumentIdType'
+                  description: unique root document identifier of a XDS document
+            - type: object
+              required:
+                - masterIdentifier
+              properties:
+                masterIdentifier:
+                  allOf:
+                    - $ref: '#/components/schemas/MasterIdentifierType'
+                  description: identifier of a MHD document
+    GDPolicyAssignmentForFolderType:
+      description: Global deny policy assigment for a single (dynamic) folder.
+      type: object
+      properties:
+        for:
+          type: string
+          enum:
+            - folder
+        parameters:
+          type: object
+          required:
+            - folderUUID
+          properties:
+            folderUUID:
+              allOf:
+                - $ref: '#/components/schemas/UuidType'
+              description: _Folder.entryUUID_ for XDS or _List.identifier:entryUUID.value_ of profile _EPA MHD Folder_ for MHD
+    UserAgentType:
+      description: "Information about client software with: ClientId (1 to 20 characters) + / + VersionNumber (1 to 15 characters)."
+      type: string
+      pattern: '^[a-zA-Z0-9\-]{1,20}\/[a-zA-Z0-9\-\.]{1,15}$'
+      example: CLIENTID1234567890AB/2.1.12-45
+    RequestIdType:
+      type: string
+      format: uuid
+      description: "Unique identifier of the request"
+      example: "f4411e89-2eca-405c-88a1-7ee20b9b6e3c"
+    InsurantIdType:
+      type: string
+      description: |-
+        The health record identifier. 
+        For today the record identifier equals the insurant id (kvnr).
+      pattern: '^[A-Z]{1}\d{9}$'
+      example: Z123456789
+    ErrorType:
+      description: Error object with additional information about the occurred error
+      type: object
+      properties:
+        errorCode:
+          description: Error condition specifier
+          type: string
+        errorDetail:
+          description: Additional details regarding the error condition (if applicable)
+          type: string
+      required:
+        - errorCode
+
+  examples:
+    Delete_three_documents:
+      summary: Delete three different assignments
+      value: 
+        data:
+          - assignmentId: fa1d1e42-4e6f-4640-9ffd-c2409924ddc7
+          - assignmentId: e4bf557f-03fc-4c85-a9c3-3a33b1a144f0
+          - assignmentId: 5496c3bd-712f-457b-ba14-c05dfbf3755e
+    Failed_response_delete_three_documents:
+      summary: Response for attempt to delete several assignments with two assignments not existing
+      value: 
+        data:
+          - errorCode: noResource
+            assignmentId: e4bf557f-03fc-4c85-a9c3-3a33b1a144f0
+          - errorCode: noResource
+            assignmentId: e4bf557f-03fc-4c85-a9c3-c05dfbf3755e
+    Add_three_documents:
+      summary: Assign three different documents
+      value: 
+        data:
+          - for: document
+            parameters:
+              rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+          - for: document
+            parameters:
+              masterIdentifier: 636a1c8d-1c56-46f4-abc3-ebb7a1b96066  
+          - for: document
+            parameters:
+              rootDocumentId: urn:uuid:1c3dc2c9-0433-4e35-88c4-1cb78e2128cd^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+    Response_add_three_documents:
+      summary: Response for assignment of three different documents
+      value: 
+        data:
+          - assignmentId: fa1d1e42-4e6f-4640-9ffd-c2409924ddc7
+            for: document
+            parameters:
+              rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+          - assignmentId: e4bf557f-03fc-4c85-a9c3-3a33b1a144f0
+            for: document
+            parameters:
+              masterIdentifier: 636a1c8d-1c56-46f4-abc3-ebb7a1b96066  
+          - assignmentId: 5496c3bd-712f-457b-ba14-c05dfbf3755e
+            for: document
+            parameters:
+              rootDocumentId: urn:uuid:1c3dc2c9-0433-4e35-88c4-1cb78e2128cd^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+    Add_two_categories_and_one_folder:
+      summary: Assign two categories and a folder (e.g. a particular diga folder)
+      value: 
+        data:
+          - for: category
+            parameters:
+              categoryId: vaccination  
+          - for: category
+            parameters:
+              categoryId: eau  
+          - for: folder
+            parameters:
+              folderUUID: urn:uuid:09cf5b85-51e3-4d33-bd54-fa3046122746
+    Response_add_two_categories_and_one_folder:
+      summary: Response for assignment of two categories and a folder (e.g. a particular diga folder)
+      value: 
+        data:
+          - assignmentId: 9186b3a8-ac19-4fd5-b4b5-8e3481e07c72
+            for: category
+            parameters:
+              categoryId: vaccination  
+          - assignmentId: 21d1a52a-d54c-4eda-b1fa-20ffd851841a
+            for: category
+            parameters:
+              categoryId: eau  
+          - assignmentId: 58cf093e-2cc2-4c38-80e8-c4ef83d9ea08
+            for: folder
+            parameters:
+              folderUUID: urn:uuid:09cf5b85-51e3-4d33-bd54-fa3046122746
+    Failed_add_three_documents:
+      summary: Attempt to assign three different documents with document no.2 not existing
+      value: 
+        data:
+          - for: document
+            parameters:
+              rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+          - for: document
+            parameters:
+              rootDocumentId: urn:uuid:d3e61237-942a-4956-b8fd-95880030e90b^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+          - for: document
+            parameters:
+              rootDocumentId: urn:uuid:1c3dc2c9-0433-4e35-88c4-1cb78e2128cd^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+    Failed_response_add_three_documents:
+      summary: Response for attempt to assign three different documents with document no.2 not existing
+      value: 
+        data:
+          - errorCode: noResource
+            for: document
+            parameters:
+              rootDocumentId: urn:uuid:d3e61237-942a-4956-b8fd-95880030e90b^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId  
+    Failed_add_two_categories_with_unsupported_id_and_document_in_technical_folder:
+      summary: Attempt to assign two categories providing an unsupported id and a document located in technical folder
+      value: 
+        data:
+          - for: category
+            parameters:
+              categoryId: technical  
+          - for: document
+            parameters:
+              rootDocumentId: urn:uuid:a3b3b6b4-9b24-44c1-850a-82ab0f118849^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId 
+          - for: category
+            parameters:
+              category: an-invalid-category-id
+    Failed_response_add_two_categories_with_unsupported_id_and_document_in_technical_folder:
+      summary: Response for attempt to assign two categories providing an unsupported id and a document located in technical folder
+      value: 
+        data:
+          - errorCode: noResource
+            for: category
+            parameters:
+              categoryId: technical 
+          - errorCode: noResource
+            for: category
+            parameters:
+              categoryId: an-invalid-category-id 
+          - errorCode: invalidResource
+            for: document
+            parameters:
+              rootDocumentId: urn:uuid:a3b3b6b4-9b24-44c1-850a-82ab0f118849^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId 
+    
+    Add_category_to_general_deny_policy:
+      summary: Set an assigment for a category in General Deny Policy
+      value:
+        for: category
+        parameters:
+          categoryId: patient
+    Response_category_to_general_deny_policy:
+      summary: Response of assigment for a category in General Deny Policy
+      value:
+        assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
+        for: category
+        parameters:
+          categoryId: patient
+    Add_document_to_general_deny_policy:
+      summary: Set an assigment for a document in General Deny Policy
+      value:
+        for: document
+        parameters:
+          rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+    Response_document_to_general_deny_policy:
+      summary: Response of assigment for a document in General Deny Policy
+      value:
+        assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
+        for: document
+        parameters:
+          rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+    Add_folder_to_general_deny_policy:
+      summary: Set an assigment for a folder in General Deny Policy
+      value:
+        for: folder
+        parameters:
+          folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
+    Response_folder_to_general_deny_policy:
+      summary: Response of assigment for a folder in General Deny Policy
+      value:
+        assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
+        for: folder
+        parameters:
+          folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
+    Get_AllPolicyAssignments:
+      summary: Get all Deny Policy assignments.
+      value:
+        data:
+          - assignmentId: ddf19ee6-e831-430d-893f-71d219ac12a0
+            for: category
+            parameters:
+              categoryId: patient
+          - assignmentId: b4593ccc-e29e-47b0-89fc-1ee80df188aa
+            for: document
+            parameters:
+              rootDocumentId: urn:uuid:0f70653d-d5f4-46f0-99e1-b6af92eea2b6^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+          - assignmentId: 8130eafa-a4fa-4337-aedb-6019b66e48f3
+            for: folder
+            parameters:
+              folderUUID: urn:uuid:84d92a96-3585-4ad3-94b1-c4f3dbe87176
+          - assignmentId: 21694fb0-3019-4824-a34e-d4e1c031470e
+            for: category
+            parameters:
+              categoryId: dental
+          - assignmentId: 74343201-e669-4675-8414-3ce517220a3b
+            for: document
+            parameters:
+              rootDocumentId: urn:uuid:c4e17b20-ecee-4261-a51d-396b8e81bc27^^^^urn:gematik:iti:xds:2023:rootDocumentUniqueId
+          - assignmentId: 7730578d-9380-47d6-ae82-d2c47ca399af
+            for: folder
+            parameters:
+              folderUUID: urn:uuid:f9929ed6-1119-4dea-a48a-1cfe8117f7b7

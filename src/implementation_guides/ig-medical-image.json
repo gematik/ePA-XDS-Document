@@ -6,6 +6,7 @@
 		"url": "https://fachportal.gematik.de/"
 	},
 	"validFromDate": "2023-01-01",
+	"clientReadOnlyFromDate": "2027-10-20",
 	"elements": [
 		{
 			"name": "Medical Image",
